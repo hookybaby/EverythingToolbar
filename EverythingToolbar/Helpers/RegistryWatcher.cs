@@ -1,9 +1,10 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Management;
 using System.Security.Principal;
+using Microsoft.Win32;
+using NLog;
 
-namespace EverythingToolbar
+namespace EverythingToolbar.Helpers
 {
     public delegate void RegistryChange();
     public delegate void RegistryChangeValue(object newValue);
@@ -23,40 +24,50 @@ namespace EverythingToolbar
 
         public object GetValue(object defaultValue = null)
         {
-            return Registry.GetValue(this.hive + @"\" + this.keyPath, this.valueName, defaultValue);
+            return Registry.GetValue(hive + @"\" + keyPath, valueName, defaultValue);
         }
     }
 
     internal class RegistryWatcher
     {
-        private ManagementEventWatcher watcher;
-        private RegistryEntry target;
+        private readonly ManagementEventWatcher watcher;
+        private readonly RegistryEntry target;
+        private static readonly ILogger Logger = ToolbarLogger.GetLogger<RegistryWatcher>();
 
         public event RegistryChange OnChange;
         public event RegistryChangeValue OnChangeValue;
 
-        public RegistryWatcher(string regHive, string regKeyPath, string regValueName) 
-            : this(new RegistryEntry(regHive, regKeyPath, regValueName))
-        {
-        }
         public RegistryWatcher(RegistryEntry target)
         {
             this.target = target;
-            this.watcher = CreateQuery();
 
-            this.watcher.EventArrived += Watcher_EventArrived;
+            watcher = CreateWatcher();
+            watcher.EventArrived += OnEventArrived;
 
-            this.Start();
+            Start();
+        }
+
+        ~RegistryWatcher()
+        {
+            if (watcher != null)
+                watcher.Dispose();
         }
 
         public void Start()
         {
-            this.watcher.Start();
+            try
+            {
+                watcher.Start();
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, $"Failed to initialize RegistryWatcher for target {target}.");
+            }
         }
 
         public void Stop()
         {
-            this.watcher.Stop();
+            watcher.Stop();
         }
 
         private static string EscapeBackticks(string unescaped)
@@ -64,21 +75,21 @@ namespace EverythingToolbar
             return unescaped.Replace(@"\", @"\\");
         }
 
-        private ManagementEventWatcher CreateQuery()
+        private ManagementEventWatcher CreateWatcher()
         {
             // Cannot watch HKEY_CURRENT_USER as it is synthetic.
-            if (this.target.hive == "HKEY_CURRENT_USER")
+            if (target.hive == "HKEY_CURRENT_USER")
             {
-                this.target.hive = "HKEY_USERS";
-                this.target.keyPath = WindowsIdentity.GetCurrent().User.Value + @"\" + this.target.keyPath;
+                target.hive = "HKEY_USERS";
+                target.keyPath = WindowsIdentity.GetCurrent().User.Value + @"\" + target.keyPath;
             }
 
-            string qu = "SELECT * FROM RegistryValueChangeEvent WHERE " +
-                    $"Hive='{this.target.hive}' " +
-                    $"AND KeyPath='{EscapeBackticks(this.target.keyPath)}' " +
-                    $"AND ValueName='{this.target.valueName}'";
+            var qu = "SELECT * FROM RegistryValueChangeEvent WHERE " +
+                     $"Hive='{target.hive}' " +
+                     $"AND KeyPath='{EscapeBackticks(target.keyPath)}' " +
+                     $"AND ValueName='{target.valueName}'";
 
-            WqlEventQuery query = new WqlEventQuery(qu);
+            var query = new WqlEventQuery(qu);
             return new ManagementEventWatcher(query);
         }
 
@@ -87,14 +98,14 @@ namespace EverythingToolbar
             return target.GetValue(defaultValue);
         }
 
-        private void Watcher_EventArrived(object sender, EventArrivedEventArgs e)
+        private void OnEventArrived(object sender, EventArrivedEventArgs e)
         {
-            this.OnChange?.Invoke();
+            OnChange?.Invoke();
 
-            // No need to read value when nobody wants it
-            if (this.OnChangeValue?.GetInvocationList().Length > 0)
-            { 
-                this.OnChangeValue?.Invoke(this.GetValue());
+            // Only read value if required
+            if (OnChangeValue?.GetInvocationList().Length > 0)
+            {
+                OnChangeValue?.Invoke(GetValue());
             }
         }
     }

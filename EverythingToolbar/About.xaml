@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:properties="clr-namespace:EverythingToolbar.Properties"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:h="clr-namespace:EverythingToolbar.Helpers"
+        xmlns:b="clr-namespace:EverythingToolbar.Behaviors"
         Title="{x:Static properties:Resources.AboutWindowTitle}"
         ResizeMode="NoResize"
         Height="330"
         Width="380">
     <i:Interaction.Behaviors>
-        <h:DpiScaling x:Name="dpiScaling" />
+        <b:FlowDirectionAwareness />
+        <b:DpiScaling />
     </i:Interaction.Behaviors>
 
     <Grid>
@@ -20,6 +21,7 @@
         </Grid.RowDefinitions>
         <Rectangle Fill="Black" />
         <TextBlock Text="EverythingToolbar"
+                   Grid.Row="0"
                    Padding="25, 0, 0, 0"
                    Foreground="White"
                    FontSize="26"
@@ -34,16 +36,21 @@
                     </Style>
                 </StackPanel.Resources>
                 <TextBlock>EverythingToolbar</TextBlock>
-                <TextBlock Name="VersionTextBlock"></TextBlock>
-                <TextBlock>Copyright © 2022 Stephan Rumswinkel</TextBlock>
+                <TextBox Name="VersionTextBlock"
+                         Margin="23,5,15,5"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="{Binding Text, Mode=OneWay}" />
+                <TextBlock>Copyright © 2024 Stephan Rumswinkel</TextBlock>
                 <TextBlock>
                     <Run Text="{x:Static properties:Resources.AboutLicense}" />: MIT
                 </TextBlock>
                 <TextBlock>
                     <Run Text="{x:Static properties:Resources.AboutWebsite}" />:
-                    <Hyperlink NavigateUri="https://www.github.com/stnkl/EverythingToolbar"
+                    <Hyperlink NavigateUri="https://www.github.com/srwi/EverythingToolbar"
                                RequestNavigate="Hyperlink_RequestNavigate">
-                        https://www.github.com/stnkl/EverythingToolbar
+                        https://www.github.com/srwi/EverythingToolbar
                     </Hyperlink>
                 </TextBlock>
             </StackPanel>
@@ -52,8 +59,7 @@
                    Grid.Row="2"/>
         <Button Grid.Row="2"
                 Margin="250, 10, 10, 10"
-                Click="Button_Click">
-            OK
-        </Button>
+                Click="Button_Click" Content="{x:Static properties:Resources.AboutOK}" />
+        
     </Grid>
 </Window>

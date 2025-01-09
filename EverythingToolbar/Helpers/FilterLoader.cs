@@ -1,47 +1,35 @@
-﻿using EverythingToolbar.Data;
-using Microsoft.VisualBasic.FileIO;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
+using Castle.Core.Internal;
+using EverythingToolbar.Data;
+using EverythingToolbar.Properties;
+using Microsoft.VisualBasic.FileIO;
+using NLog;
 
 namespace EverythingToolbar.Helpers
 {
-    class FilterLoader : INotifyPropertyChanged
+    internal class FilterLoader : INotifyPropertyChanged
     {
-        private readonly ObservableCollection<Filter> defaultFilters = new ObservableCollection<Filter>
+        private readonly ObservableCollection<Filter> _defaultFilters = new ObservableCollection<Filter>
         {
             new Filter {
-                Name = Properties.Resources.DefaultFilterAll,
-                Icon = "\xE71D  ",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
-                Macro = "",
-                Search = ""
+                Name = Resources.DefaultFilterAll,
+                Icon = Utils.GetWindowsVersion() >= Utils.WindowsVersion.Windows10 ? "\xE71D" : ""
             },
             new Filter {
-                Name = Properties.Resources.DefaultFilterFile,
-                Icon = "\xE7C3  ",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
-                Macro = "",
+                Name = Resources.DefaultFilterFile,
+                Icon = Utils.GetWindowsVersion() >= Utils.WindowsVersion.Windows10 ? "\xE7C3" : "",
                 Search = "file:"
             },
             new Filter {
-                Name = Properties.Resources.DefaultFilterFolder,
-                Icon = "\xE8B7  ",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
-                Macro = "",
+                Name = Resources.DefaultFilterFolder,
+                Icon = Utils.GetWindowsVersion() >= Utils.WindowsVersion.Windows10 ? "\xE8B7" : "",
                 Search = "folder:"
             }
         };
@@ -49,268 +37,288 @@ namespace EverythingToolbar.Helpers
         { 
             get
             {
-                if (Properties.Settings.Default.isRegExEnabled)
-                {
-                    return new ObservableCollection<Filter>(defaultFilters.Skip(0).Take(1));
-                }
-                else
-                {
-                    return defaultFilters;
-                }
+                if (ToolbarSettings.User.IsRegExEnabled)
+                    return new ObservableCollection<Filter>(_defaultFilters.Skip(0).Take(1));
+                
+                return _defaultFilters;
             }
         }
         
-
-        public readonly ObservableCollection<Filter> DefaultUserFilters = new ObservableCollection<Filter>()
+        public readonly ObservableCollection<Filter> DefaultUserFilters = new ObservableCollection<Filter>
         {
             new Filter {
-                Name = Properties.Resources.UserFilterAudio,
-                Icon = "",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
+                Name = Resources.UserFilterAudio,
                 Macro = "audio",
-                Search = "ext:aac;ac3;aif;aifc;aiff;au;cda;dts;fla;flac;it;m1a;m2a;m3u;m4a;mid;midi;mka;mod;mp2;mp3;mpa;ogg;ra;rmi;spc;rmi;snd;umx;voc;wav;wma;xm"
+                Search = "ext:aac;ac3;aif;aifc;aiff;au;cda;dts;fla;flac;it;m1a;m2a;m3u;m4a;mid;" +
+                         "midi;mka;mod;mp2;mp3;mpa;ogg;ra;rmi;spc;rmi;snd;umx;voc;wav;wma;xm"
             },
             new Filter {
-                Name = Properties.Resources.UserFilterCompressed,
-                Icon = "",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
+                Name = Resources.UserFilterCompressed,
                 Macro = "zip",
-                Search = "ext:7z;ace;arj;bz2;cab;gz;gzip;jar;r00;r01;r02;r03;r04;r05;r06;r07;r08;r09;r10;r11;r12;r13;r14;r15;r16;r17;r18;r19;r20;r21;r22;r23;r24;r25;r26;r27;r28;r29;rar;tar;tgz;z;zip"
+                Search = "ext:7z;ace;arj;bz2;cab;gz;gzip;jar;r00;r01;r02;r03;r04;r05;r06;r07;" +
+                         "r08;r09;r10;r11;r12;r13;r14;r15;r16;r17;r18;r19;r20;r21;r22;r23;r24;" +
+                         "r25;r26;r27;r28;r29;rar;tar;tgz;z;zip"
             },
             new Filter {
-                Name = Properties.Resources.UserFilterDocument,
-                Icon = "",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
+                Name = Resources.UserFilterDocument,
                 Macro = "doc",
-                Search = "ext:c;chm;cpp;csv;cxx;doc;docm;docx;dot;dotm;dotx;h;hpp;htm;html;hxx;ini;java;lua;mht;mhtml;odt;pdf;potx;potm;ppam;ppsm;ppsx;pps;ppt;pptm;pptx;rtf;sldm;sldx;thmx;txt;vsd;wpd;wps;wri;xlam;xls;xlsb;xlsm;xlsx;xltm;xltx;xml"
+                Search = "ext:c;chm;cpp;csv;cxx;doc;docm;docx;dot;dotm;dotx;h;hpp;htm;html;hxx;" +
+                         "ini;java;lua;mht;mhtml;odt;pdf;potx;potm;ppam;ppsm;ppsx;pps;ppt;pptm;" +
+                         "pptx;rtf;sldm;sldx;thmx;txt;vsd;wpd;wps;wri;xlam;xls;xlsb;xlsm;xlsx;xltm;xltx;xml"
             },
             new Filter {
-                Name = Properties.Resources.UserFilterExecutable,
-                Icon = "",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
+                Name = Resources.UserFilterExecutable,
                 Macro = "exe",
                 Search = "ext:bat;cmd;exe;msi;msp;scr"
             },
             new Filter {
-                Name = Properties.Resources.UserFilterPicture,
-                Icon = "",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
+                Name = Resources.UserFilterPicture,
                 Macro = "pic",
                 Search = "ext:ani;bmp;gif;ico;jpe;jpeg;jpg;pcx;png;psd;tga;tif;tiff;webp;wmf"
             },
             new Filter {
-                Name = Properties.Resources.UserFilterVideo,
-                Icon = "",
-                IsMatchCase = null,
-                IsMatchWholeWord = null,
-                IsMatchPath = null,
-                IsRegExEnabled = null,
+                Name = Resources.UserFilterVideo,
                 Macro = "video",
-                Search = "ext:3g2;3gp;3gp2;3gpp;amr;amv;asf;avi;bdmv;bik;d2v;divx;drc;dsa;dsm;dss;dsv;evo;f4v;flc;fli;flic;flv;hdmov;ifo;ivf;m1v;m2p;m2t;m2ts;m2v;m4b;m4p;m4v;mkv;mp2v;mp4;mp4v;mpe;mpeg;mpg;mpls;mpv2;mpv4;mov;mts;ogm;ogv;pss;pva;qt;ram;ratdvd;rm;rmm;rmvb;roq;rpm;smil;smk;swf;tp;tpr;ts;vob;vp6;webm;wm;wmp;wmv"
+                Search = "ext:3g2;3gp;3gp2;3gpp;amr;amv;asf;avi;bdmv;bik;d2v;divx;drc;dsa;dsm;" +
+                         "dss;dsv;evo;f4v;flc;fli;flic;flv;hdmov;ifo;ivf;m1v;m2p;m2t;m2ts;m2v;" +
+                         "m4b;m4p;m4v;mkv;mp2v;mp4;mp4v;mpe;mpeg;mpg;mpls;mpv2;mpv4;mov;mts;ogm;" +
+                         "ogv;pss;pva;qt;ram;ratdvd;rm;rmm;rmvb;roq;rpm;smil;smk;swf;tp;tpr;ts;" +
+                         "vob;vp6;webm;wm;wmp;wmv"
             }
         };
-        private ObservableCollection<Filter> userFiltersCache;
+        private ObservableCollection<Filter> _userFiltersCache;
         public ObservableCollection<Filter> UserFilters
         { 
             get
             {
-                if (Properties.Settings.Default.isRegExEnabled)
-                {
+                if (ToolbarSettings.User.IsRegExEnabled)
                     return new ObservableCollection<Filter>();
-                }
-                else
-                {
-                    if (Properties.Settings.Default.isImportFilters)
-                    {
-                        return userFiltersCache ?? LoadFilters();
-                    }
-                    else
-                    {
-                        return DefaultUserFilters;
-                    }
-                }
+
+                if (ToolbarSettings.User.IsImportFilters && _userFiltersCache.IsNullOrEmpty())
+                    LoadFilters();
+
+                return _userFiltersCache ?? DefaultUserFilters;
             }
         }
 
         public static readonly FilterLoader Instance = new FilterLoader();
         public event PropertyChangedEventHandler PropertyChanged;
-        private FileSystemWatcher watcher;
+        private static readonly ILogger Logger = ToolbarLogger.GetLogger<FilterLoader>();
+        private FileSystemWatcher _watcher;
 
         private FilterLoader()
         {
-            if (Properties.Settings.Default.filtersPath == "")
-                Properties.Settings.Default.filtersPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                                                                       "Everything",
-                                                                       "Filters.csv");
-            Properties.Settings.Default.PropertyChanged += OnPropertyChanged;
+            if (ToolbarSettings.User.FiltersPath == "")
+                ToolbarSettings.User.FiltersPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                                                "Everything",
+                                                                "Filters.csv");
+            ToolbarSettings.User.PropertyChanged += OnSettingsChanged;
 
-            using (var ifc = new InstalledFontCollection())
+            NotifyFiltersChanged();
+            
+            if (ToolbarSettings.User.IsImportFilters)
+                CreateFileWatcher();
+        }
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnSettingsChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
             {
-                if (!ifc.Families.Any(f => f.Name == "Segoe MDL2 Assets"))
+                case nameof(ToolbarSettings.User.IsRegExEnabled):
+                    NotifyFiltersChanged();
+                    break;
+                case nameof(ToolbarSettings.User.IsImportFilters):
                 {
-                    foreach (Filter defaultFilter in defaultFilters)
-                        defaultFilter.Icon = "";
+                    if (ToolbarSettings.User.IsImportFilters)
+                    {
+                        CreateFileWatcher();
+                    }
+                    else
+                    {
+                        StopFileWatcher();
+                        _userFiltersCache = null;
+                        foreach (var filter in DefaultFilters)
+                            filter.Reset();
+                    }
+                
+                    NotifyFiltersChanged();
+                    break;
                 }
             }
-
-            RefreshFilters();
-            CreateFileWatcher();
         }
 
-        private void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void NotifyFiltersChanged()
         {
-            if (e.PropertyName == "isRegExEnabled" || e.PropertyName == "isImportFilters")
-                RefreshFilters();
+            NotifyPropertyChanged(nameof(DefaultFilters));
+            NotifyPropertyChanged(nameof(UserFilters));
         }
 
-        private void RefreshFilters()
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DefaultFilters"));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("UserFilters"));
-        }
-
-        private ObservableCollection<Filter> LoadFilters()
+        private void LoadFilters()
         {
             var filters = new ObservableCollection<Filter>();
 
-            if (!File.Exists(Properties.Settings.Default.filtersPath))
+            if (!File.Exists(ToolbarSettings.User.FiltersPath))
             {
-                ToolbarLogger.GetLogger("EverythingToolbar").Info("Filters.csv could not be found at " + Properties.Settings.Default.filtersPath);
+                Logger.Info("Filters.csv could not be found at " + ToolbarSettings.User.FiltersPath);
 
-                MessageBox.Show(Properties.Resources.MessageBoxSelectFiltersCsv,
-                                Properties.Resources.MessageBoxSelectFiltersCsvTitle,
+                MessageBox.Show(Resources.MessageBoxSelectFiltersCsv,
+                                Resources.MessageBoxSelectFiltersCsvTitle,
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
-                using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                using (var openFileDialog = new OpenFileDialog())
                 {
-                    openFileDialog.InitialDirectory = Path.Combine(Properties.Settings.Default.filtersPath, "..");
+                    openFileDialog.InitialDirectory = Path.Combine(ToolbarSettings.User.FiltersPath, "..");
                     openFileDialog.Filter = "Filters.csv|Filters.csv|All files (*.*)|*.*";
                     openFileDialog.FilterIndex = 1;
 
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        Properties.Settings.Default.filtersPath = openFileDialog.FileName;
+                        ToolbarSettings.User.FiltersPath = openFileDialog.FileName;
                         CreateFileWatcher();
-                        Properties.Settings.Default.Save();
                     }
                     else
                     {
-                        Properties.Settings.Default.isImportFilters = false;
-                        Properties.Settings.Default.Save();
-                        return DefaultUserFilters;
+                        ToolbarSettings.User.IsImportFilters = false;
+                        return;
                     }
                 }
             }
 
             try
             {
-                using (TextFieldParser csvParser = new TextFieldParser(Properties.Settings.Default.filtersPath))
+                using (var csvParser = new TextFieldParser(ToolbarSettings.User.FiltersPath))
                 {
-                    csvParser.CommentTokens = new string[] { "#" };
-                    csvParser.SetDelimiters(new string[] { "," });
+                    csvParser.CommentTokens = new[] { "#" };
+                    csvParser.SetDelimiters(",");
                     csvParser.HasFieldsEnclosedInQuotes = true;
 
-                    // Skip header row
-                    csvParser.ReadLine();
+                    var header = csvParser.ReadFields();
 
                     while (!csvParser.EndOfData)
                     {
-                        string[] fields = csvParser.ReadFields();
+                        var fields = csvParser.ReadFields();
 
-                        // Skip default filters
-                        string search = fields[6].Trim();
-                        if (search == "file:" ||
-                            search == "folder:" ||
-                            search == "")
+                        if (header == null || fields == null)
                             continue;
+                        
+                        var filterDict = header
+                            .Zip(fields, (h, f) => new { h, f })
+                            .ToDictionary(x => x.h, x => x.f);
+                        var filter = parseFilterFromDict(filterDict);
 
-                        // Everything's default filters are uppercase
-                        fields[0] = fields[0].Replace("AUDIO", Properties.Resources.UserFilterAudio);
-                        fields[0] = fields[0].Replace("COMPRESSED", Properties.Resources.UserFilterCompressed);
-                        fields[0] = fields[0].Replace("DOCUMENT", Properties.Resources.UserFilterDocument);
-                        fields[0] = fields[0].Replace("EXECUTABLE", Properties.Resources.UserFilterExecutable);
-                        fields[0] = fields[0].Replace("PICTURE", Properties.Resources.UserFilterPicture);
-                        fields[0] = fields[0].Replace("VIDEO", Properties.Resources.UserFilterVideo);
-
-                        filters.Add(new Filter()
+                        if (filter.Name == "EVERYTHING")
                         {
-                            Name = fields[0],
-                            IsMatchCase = fields[1] == "1",
-                            IsMatchWholeWord = fields[2] == "1",
-                            IsMatchPath = fields[3] == "1",
-                            IsRegExEnabled = fields[5] == "1",
-                            Search = fields[6],
-                            Macro = fields[7]
-                        });
+                            _defaultFilters[0].IsMatchCase = filter.IsMatchCase;
+                            _defaultFilters[0].IsMatchWholeWord = filter.IsMatchWholeWord;
+                            _defaultFilters[0].IsMatchPath = filter.IsMatchPath;
+                            _defaultFilters[0].IsRegExEnabled = filter.IsRegExEnabled;
+                            _defaultFilters[0].Search = filter.Search;
+                            _defaultFilters[0].Macro = filter.Macro;
+                        }
+                        else if (filter.Name == "FOLDER")
+                        {
+                            _defaultFilters[2].IsMatchCase = filter.IsMatchCase;
+                            _defaultFilters[2].IsMatchWholeWord = filter.IsMatchWholeWord;
+                            _defaultFilters[2].IsMatchPath = filter.IsMatchPath;
+                            _defaultFilters[2].IsRegExEnabled = filter.IsRegExEnabled;
+                            _defaultFilters[2].Search = filter.Search;
+                            _defaultFilters[2].Macro = filter.Macro;
+                        }
+                        else
+                        {
+                            // Everything's default filters are uppercase
+                            filter.Name = filter.Name
+                                .Replace("AUDIO", Resources.UserFilterAudio)
+                                .Replace("COMPRESSED", Resources.UserFilterCompressed)
+                                .Replace("DOCUMENT", Resources.UserFilterDocument)
+                                .Replace("EXECUTABLE", Resources.UserFilterExecutable)
+                                .Replace("PICTURE", Resources.UserFilterPicture)
+                                .Replace("VIDEO", Resources.UserFilterVideo);
+                            filters.Add(filter);
+                        }
                     }
                 }
+                _userFiltersCache = filters;
             }
             catch (Exception e)
             {
-                ToolbarLogger.GetLogger("EverythingToolbar").Error(e, "Parsing Filters.csv failed.");
-                return DefaultUserFilters;
+                Logger.Error(e, "Parsing Filters.csv failed.");
             }
 
-            userFiltersCache = filters;
-            return filters;
+        }
+
+        private Filter parseFilterFromDict(Dictionary<string, string> dict)
+        {
+            return new Filter
+            {
+                Name = dict["Name"],
+                IsMatchCase = dict["Case"] == "1",
+                IsMatchWholeWord = dict["Whole Word"] == "1",
+                IsMatchPath = dict["Path"] == "1",
+                IsRegExEnabled = dict["Regex"] == "1",
+                Search = dict["Search"],
+                Macro = dict["Macro"]
+            };
+        }
+
+        private void StopFileWatcher()
+        {
+            if (_watcher == null)
+                return;
+
+            _watcher.EnableRaisingEvents = false;
         }
 
         private void CreateFileWatcher()
         {
-            if (!File.Exists(Properties.Settings.Default.filtersPath))
+            if (!File.Exists(ToolbarSettings.User.FiltersPath))
                 return;
 
-            watcher = new FileSystemWatcher
+            _watcher = new FileSystemWatcher
             {
-                Path = Path.GetDirectoryName(Properties.Settings.Default.filtersPath),
-                Filter = Path.GetFileName(Properties.Settings.Default.filtersPath),
-                NotifyFilter = NotifyFilters.FileName
+                Path = Path.GetDirectoryName(ToolbarSettings.User.FiltersPath),
+                Filter = Path.GetFileName(ToolbarSettings.User.FiltersPath),
+                NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite
             };
 
-            watcher.Changed += new FileSystemEventHandler(OnFileChanged);
-            watcher.Created += new FileSystemEventHandler(OnFileChanged);
-            watcher.Deleted += new FileSystemEventHandler(OnFileChanged);
-            watcher.Renamed += new RenamedEventHandler(OnFileRenamed);
+            _watcher.Changed += OnFileChanged;
+            _watcher.Created += OnFileChanged;
+            _watcher.Deleted += OnFileChanged;
+            _watcher.Renamed += OnFileRenamed;
 
-            watcher.EnableRaisingEvents = true;
+            _watcher.EnableRaisingEvents = true;
         }
 
         private void OnFileRenamed(object sender, RenamedEventArgs e)
         {
+            ToolbarSettings.User.FiltersPath = e.FullPath;
+            CreateFileWatcher();
             LoadFilters();
-            RefreshFilters();
+            NotifyFiltersChanged();
+            EverythingSearch.Instance.Reset();
         }
 
         private void OnFileChanged(object source, FileSystemEventArgs e)
         {
             LoadFilters();
-            RefreshFilters();
+            NotifyFiltersChanged();
+            EverythingSearch.Instance.Reset();
         }
 
         public Filter GetLastFilter()
         {
-            if (Properties.Settings.Default.isRememberFilter)
+            if (!ToolbarSettings.User.IsRememberFilter)
+                return DefaultFilters[0];
+            
+            foreach (var filter in DefaultFilters.Union(UserFilters))
             {
-                foreach (Filter filter in DefaultFilters.Union(UserFilters))
-                {
-                    if (filter.Name == Properties.Settings.Default.lastFilter)
-                        return filter;
-                }
+                if (filter.Name == ToolbarSettings.User.LastFilter)
+                    return filter;
             }
 
             return DefaultFilters[0];

@@ -151,7 +151,7 @@
     <value>يولىنى ئېچىش</value>
   </data>
   <data name="ContextMenuOpenWinContext" xml:space="preserve">
-    <value>Show more options</value>
+    <value>باشقا تاللانمىلارنى كۆرسىتىش</value>
   </data>
   <data name="ContextMenuOpenWith" xml:space="preserve">
     <value>بىلەن ئېچىش...</value>
@@ -285,7 +285,7 @@
   <data name="RulesWindowTitle" xml:space="preserve">
     <value>قائىدىلەر</value>
   </data>
-  <data name="SearchBoxWatermark" xml:space="preserve">
+  <data name="TextBoxWatermark" xml:space="preserve">
     <value>Everything بىلەن ئىزدەش</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
@@ -333,6 +333,9 @@
   <data name="SettingsRules" xml:space="preserve">
     <value>قائىدىلەر...</value>
   </data>
+  <data name="SettingsSetInstanceName" xml:space="preserve">
+    <value>ئۈلگە نامىنى بەلگىلەش...</value>
+  </data>
   <data name="SettingsShowQuickToggles" xml:space="preserve">
     <value>تېز ئالماشتۇرغۇچنى كۆرسىتىش</value>
   </data>
@@ -344,6 +347,9 @@
   </data>
   <data name="SettingsTheme" xml:space="preserve">
     <value>ئۇسلۇب</value>
+  </data>
+  <data name="SettingsThemeAuto" xml:space="preserve">
+    <value>ئۇسلۇبنى ماسقەدەملەش</value>
   </data>
   <data name="SettingsThumbnailsEnabled" xml:space="preserve">
     <value>سىنبەلگىلەرنى قوزغىتىش</value>
@@ -360,83 +366,44 @@
   <data name="ShortcutWindowTitle" xml:space="preserve">
     <value>تېزلەتمە كۇنۇپكىنى كىرگۈزۈش...</value>
   </data>
-  <data name="SortByAttributesAscending" xml:space="preserve">
-    <value>خاسلىقلىرىنىڭ ئېشىش تەرتىپى</value>
+  <data name="SortByAttributes" xml:space="preserve">
+    <value>Attributes</value>
   </data>
-  <data name="SortByAttributesDescending" xml:space="preserve">
-    <value>خاسلىقلىرىنىڭ كېمىيىش تەرتىپى</value>
+  <data name="SortByDateAccessed" xml:space="preserve">
+    <value>Date accessed</value>
   </data>
-  <data name="SortByDateAccessedAscending" xml:space="preserve">
-    <value>زىيارەت قىلىنغان ۋاقتىنىڭ ئېشىش تەرتىپى</value>
+  <data name="SortByDateCreated" xml:space="preserve">
+    <value>Date created</value>
   </data>
-  <data name="SortByDateAccessedDescending" xml:space="preserve">
-    <value>زىيارەت قىلىنغان ۋاقتىنىڭ كېمىيىش تەرتىپى</value>
+  <data name="SortByDateModified" xml:space="preserve">
+    <value>Date modified</value>
   </data>
-  <data name="SortByDateCreatedAscending" xml:space="preserve">
-    <value>قۇرۇلغان ۋاقتىنىڭ ئېشىش تەرتىپى</value>
+  <data name="SortByDateRecentlyChanged" xml:space="preserve">
+    <value>Date recently changed</value>
   </data>
-  <data name="SortByDateCreatedDescending" xml:space="preserve">
-    <value>قۇرۇلغان ۋاقتىنىڭ كېمىيىش تەرتىپى</value>
+  <data name="SortByDateRun" xml:space="preserve">
+    <value>Date run</value>
   </data>
-  <data name="SortByDateModifiedAscending" xml:space="preserve">
-    <value>ئۆزگەرتىلگەن ۋاقتىنىڭ ئېشىش تەرتىپى</value>
+  <data name="SortByExtension" xml:space="preserve">
+    <value>Extension</value>
   </data>
-  <data name="SortByDateModifiedDescending" xml:space="preserve">
-    <value>ئۆزگەرتىلگەن ۋاقتىنىڭ كېمىيىش تەرتىپى</value>
+  <data name="SortByFileListFilename" xml:space="preserve">
+    <value>File list filename</value>
   </data>
-  <data name="SortByDateRecentlyChangedAscending" xml:space="preserve">
-    <value>يېقىندا ئۆزگەرتىلگەن ۋاقتىنىڭ ئېشىش تەرتىپى</value>
+  <data name="SortByName" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="SortByDateRecentlyChangedDescending" xml:space="preserve">
-    <value>يېقىندا ئۆزگەرتىلگەن ۋاقتىنىڭ كېمىيىش تەرتىپى</value>
+  <data name="SortByPath" xml:space="preserve">
+    <value>Path</value>
   </data>
-  <data name="SortByDateRunAscending" xml:space="preserve">
-    <value>ئىجرا ۋاقتىنىڭ ئېشىش تەرتىپى</value>
+  <data name="SortByRunCount" xml:space="preserve">
+    <value>Run count</value>
   </data>
-  <data name="SortByDateRunDescending" xml:space="preserve">
-    <value>ئىجرا ۋاقتىنىڭ كېمىيىش تەرتىپى</value>
+  <data name="SortBySize" xml:space="preserve">
+    <value>Size</value>
   </data>
-  <data name="SortByExtensionAscending" xml:space="preserve">
-    <value>كېڭەيتمە نامىنىڭ ئېشىش تەرتىپى</value>
-  </data>
-  <data name="SortByExtensionDescending" xml:space="preserve">
-    <value>كېڭەيتمە نامىنىڭ كېمىيىش تەرتىپى</value>
-  </data>
-  <data name="SortByFileListFilenameAscending" xml:space="preserve">
-    <value>ھۆججەت تىزىملىكى نامىنىڭ ئېشىش تەرتىپى</value>
-  </data>
-  <data name="SortByFileListFilenameDescending" xml:space="preserve">
-    <value>ھۆججەت تىزىملىكى نامىنىڭ كېمىيىش تەرتىپى</value>
-  </data>
-  <data name="SortByNameAscending" xml:space="preserve">
-    <value>نامىنىڭ ئېشىش تەرتىپى</value>
-  </data>
-  <data name="SortByNameDescending" xml:space="preserve">
-    <value>نامىنىڭ كېمىيىش تەرتىپى</value>
-  </data>
-  <data name="SortByPathAscending" xml:space="preserve">
-    <value>يولىنىڭ ئېشىش تەرتىپى</value>
-  </data>
-  <data name="SortByPathDescending" xml:space="preserve">
-    <value>يولىنىڭ كېمىيىش تەرتىپى</value>
-  </data>
-  <data name="SortByRunCountAscending" xml:space="preserve">
-    <value>ئىجرا سانىنىڭ ئېشىش تەرتىپى</value>
-  </data>
-  <data name="SortByRunCountDescending" xml:space="preserve">
-    <value>ئىجرا سانىنىڭ كېمىيىش تەرتىپى</value>
-  </data>
-  <data name="SortBySizeAscending" xml:space="preserve">
-    <value>چوڭلۇقىنىڭ ئېشىش تەرتىپى</value>
-  </data>
-  <data name="SortBySizeDescending" xml:space="preserve">
-    <value>چوڭلۇقىنىڭ كېمىيىش تەرتىپى</value>
-  </data>
-  <data name="SortByTypeNameAscending" xml:space="preserve">
-    <value>تىپ نامىنىڭ ئېشىش تەرتىپى</value>
-  </data>
-  <data name="SortByTypeNameDescending" xml:space="preserve">
-    <value>تىپ نامىنىڭ كېمىيىش تەرتىپى</value>
+  <data name="SortByTypeName" xml:space="preserve">
+    <value>Type name</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
     <value>قاراڭغۇ</value>
@@ -464,5 +431,32 @@
   </data>
   <data name="UserFilterVideo" xml:space="preserve">
     <value>سىن</value>
+  </data>
+  <data name="UpdateBannerText" xml:space="preserve">
+    <value>Update available:</value>
+  </data>
+  <data name="UpdateBannerSkip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="UpdateBannerDownload" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>Check for updates automatically</value>
+  </data>
+  <data name="SettingsSelectFirstResult" xml:space="preserve">
+    <value>Select first result</value>
+  </data>
+  <data name="SettingsDoubleClickToOpen" xml:space="preserve">
+    <value>Double-click to open</value>
+  </data>
+  <data name="SortDescending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="SortAscending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="SettingsSearchAsYouType" xml:space="preserve">
+    <value>Search as you type</value>
   </data>
 </root>

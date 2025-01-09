@@ -151,7 +151,7 @@
     <value>Open pad</value>
   </data>
   <data name="ContextMenuOpenWinContext" xml:space="preserve">
-    <value>Show more options</value>
+    <value>Toon meer opties</value>
   </data>
   <data name="ContextMenuOpenWith" xml:space="preserve">
     <value>Open met...</value>
@@ -280,13 +280,13 @@
     <value>Soort</value>
   </data>
   <data name="RulesWindowText" xml:space="preserve">
-    <value>Gebruik% file%,% filename% en% path% als placeholder in de opdracht.</value>
+    <value>Gebruik %file%, %filename% en %path% als placeholder in de opdracht.</value>
   </data>
   <data name="RulesWindowTitle" xml:space="preserve">
     <value>Regels</value>
   </data>
-  <data name="SearchBoxWatermark" xml:space="preserve">
-    <value>Zoeken met Everything...</value>
+  <data name="TextBoxWatermark" xml:space="preserve">
+    <value>Zoeken met Everything</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>object</value>
@@ -333,6 +333,9 @@
   <data name="SettingsRules" xml:space="preserve">
     <value>Regels...</value>
   </data>
+  <data name="SettingsSetInstanceName" xml:space="preserve">
+    <value>Naam van instantie instellen...</value>
+  </data>
   <data name="SettingsShowQuickToggles" xml:space="preserve">
     <value>Snel schakelen weergeven</value>
   </data>
@@ -345,6 +348,9 @@
   <data name="SettingsTheme" xml:space="preserve">
     <value>Thema</value>
   </data>
+  <data name="SettingsThemeAuto" xml:space="preserve">
+    <value>Thema synchroniseren</value>
+  </data>
   <data name="SettingsThumbnailsEnabled" xml:space="preserve">
     <value>Miniaturen inschakelen</value>
   </data>
@@ -352,7 +358,7 @@
     <value>Gebruik Everything filters</value>
   </data>
   <data name="SettingsView" xml:space="preserve">
-    <value>Bekijk</value>
+    <value>Uiterlijk</value>
   </data>
   <data name="ShortcutOK" xml:space="preserve">
     <value>Ok</value>
@@ -360,83 +366,44 @@
   <data name="ShortcutWindowTitle" xml:space="preserve">
     <value>Voer snelkoppeling in...</value>
   </data>
-  <data name="SortByAttributesAscending" xml:space="preserve">
-    <value>Attributen oplopend</value>
+  <data name="SortByAttributes" xml:space="preserve">
+    <value>Kenmerken</value>
   </data>
-  <data name="SortByAttributesDescending" xml:space="preserve">
-    <value>Attributen aflopend</value>
+  <data name="SortByDateAccessed" xml:space="preserve">
+    <value>Datum geopend</value>
   </data>
-  <data name="SortByDateAccessedAscending" xml:space="preserve">
-    <value>Datum geopend oplopend</value>
+  <data name="SortByDateCreated" xml:space="preserve">
+    <value>Aanmaakdatum</value>
   </data>
-  <data name="SortByDateAccessedDescending" xml:space="preserve">
-    <value>Datum benaderd aflopend</value>
+  <data name="SortByDateModified" xml:space="preserve">
+    <value>Wijzigingsdatum</value>
   </data>
-  <data name="SortByDateCreatedAscending" xml:space="preserve">
-    <value>Datum aangemaakt oplopend</value>
+  <data name="SortByDateRecentlyChanged" xml:space="preserve">
+    <value>Datum onlangs gewijzigd</value>
   </data>
-  <data name="SortByDateCreatedDescending" xml:space="preserve">
-    <value>Datum aangemaakt aflopend</value>
+  <data name="SortByDateRun" xml:space="preserve">
+    <value>Uitvoerdatum</value>
   </data>
-  <data name="SortByDateModifiedAscending" xml:space="preserve">
-    <value>Datum gewijzigd oplopend</value>
+  <data name="SortByExtension" xml:space="preserve">
+    <value>Extensies</value>
   </data>
-  <data name="SortByDateModifiedDescending" xml:space="preserve">
-    <value>Datum gewijzigd aflopend</value>
+  <data name="SortByFileListFilename" xml:space="preserve">
+    <value>Bestandsnaam van folder</value>
   </data>
-  <data name="SortByDateRecentlyChangedAscending" xml:space="preserve">
-    <value>Datum recentelijk gewijzigd oplopend</value>
+  <data name="SortByName" xml:space="preserve">
+    <value>Naam</value>
   </data>
-  <data name="SortByDateRecentlyChangedDescending" xml:space="preserve">
-    <value>Datum recentelijk gewijzigd aflopend</value>
+  <data name="SortByPath" xml:space="preserve">
+    <value>URL</value>
   </data>
-  <data name="SortByDateRunAscending" xml:space="preserve">
-    <value>Datum uitgevoerd oplopend</value>
+  <data name="SortByRunCount" xml:space="preserve">
+    <value>Aantal keer uitgevoerd</value>
   </data>
-  <data name="SortByDateRunDescending" xml:space="preserve">
-    <value>Datum uitgevoerd aflopend</value>
+  <data name="SortBySize" xml:space="preserve">
+    <value>Grootte</value>
   </data>
-  <data name="SortByExtensionAscending" xml:space="preserve">
-    <value>Extensie oplopend</value>
-  </data>
-  <data name="SortByExtensionDescending" xml:space="preserve">
-    <value>Extensie aflopend</value>
-  </data>
-  <data name="SortByFileListFilenameAscending" xml:space="preserve">
-    <value>Bestandslijst bestandsnaam oplopend</value>
-  </data>
-  <data name="SortByFileListFilenameDescending" xml:space="preserve">
-    <value>Bestandslijst bestandsnaam aflopend</value>
-  </data>
-  <data name="SortByNameAscending" xml:space="preserve">
-    <value>Naam oplopend</value>
-  </data>
-  <data name="SortByNameDescending" xml:space="preserve">
-    <value>Naam aflopend</value>
-  </data>
-  <data name="SortByPathAscending" xml:space="preserve">
-    <value>Pad oplopend</value>
-  </data>
-  <data name="SortByPathDescending" xml:space="preserve">
-    <value>Pad aflopend</value>
-  </data>
-  <data name="SortByRunCountAscending" xml:space="preserve">
-    <value>Keer uitgevoerd oplopend</value>
-  </data>
-  <data name="SortByRunCountDescending" xml:space="preserve">
-    <value>Keer uitgevoerd aflopend</value>
-  </data>
-  <data name="SortBySizeAscending" xml:space="preserve">
-    <value>Grootte oplopend</value>
-  </data>
-  <data name="SortBySizeDescending" xml:space="preserve">
-    <value>Grootte aflopend</value>
-  </data>
-  <data name="SortByTypeNameAscending" xml:space="preserve">
-    <value>Naam oplopend</value>
-  </data>
-  <data name="SortByTypeNameDescending" xml:space="preserve">
-    <value>Naam aflopend</value>
+  <data name="SortByTypeName" xml:space="preserve">
+    <value>Typenaam</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
     <value>Donker</value>
@@ -464,5 +431,32 @@
   </data>
   <data name="UserFilterVideo" xml:space="preserve">
     <value>Video</value>
+  </data>
+  <data name="UpdateBannerText" xml:space="preserve">
+    <value>Update beschikbaar:</value>
+  </data>
+  <data name="UpdateBannerSkip" xml:space="preserve">
+    <value>Overslaan</value>
+  </data>
+  <data name="UpdateBannerDownload" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>Automatisch controleren op updates</value>
+  </data>
+  <data name="SettingsSelectFirstResult" xml:space="preserve">
+    <value>Eerste resultaat selecteren</value>
+  </data>
+  <data name="SettingsDoubleClickToOpen" xml:space="preserve">
+    <value>Dubbelklik om te openen</value>
+  </data>
+  <data name="SortDescending" xml:space="preserve">
+    <value>Aflopend</value>
+  </data>
+  <data name="SortAscending" xml:space="preserve">
+    <value>Oplopend</value>
+  </data>
+  <data name="SettingsSearchAsYouType" xml:space="preserve">
+    <value>Zoeken terwijl u typt</value>
   </data>
 </root>

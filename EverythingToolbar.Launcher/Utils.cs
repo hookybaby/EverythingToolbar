@@ -1,96 +1,134 @@
-﻿using IWshRuntimeLibrary;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
+using EverythingToolbar.Helpers;
+using IWshRuntimeLibrary;
+using Microsoft.Win32;
+using NLog;
+using Shell32;
+using File = System.IO.File;
 
 namespace EverythingToolbar.Launcher
 {
     internal class Utils
     {
-        public enum WindowsTheme
-        {
-            Dark,
-            Light
-        }
+        private static readonly ILogger Logger = ToolbarLogger.GetLogger<Utils>();
 
         public static string GetTaskbarShortcutPath()
         {
-            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                @"\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\EverythingToolbar.lnk";
+            const string relativeTaskBarPath = @"Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar";
+            var taskBarPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), relativeTaskBarPath);
+
+            if (Directory.Exists(taskBarPath))
+            {
+                try
+                {
+                    var lnkFiles = Directory.GetFiles(taskBarPath, "*.lnk");
+                    var shell = new Shell();
+                    var thisExecutableName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
+                    foreach (var lnkFile in lnkFiles)
+                    {
+                        var folder = shell.NameSpace(Path.GetDirectoryName(lnkFile));
+                        var folderItem = folder.ParseName(Path.GetFileName(lnkFile));
+                        if (folderItem != null && folderItem.IsLink)
+                        {
+                            var link = (ShellLinkObject)folderItem.GetLink;
+                            var linkFileName = Path.GetFileName(link.Path);
+
+                            if (linkFileName == thisExecutableName)
+                                return lnkFile;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Logger.Error(e, "Failed to scan taskbar icon links. Using default path...");
+                }
+            }
+
+            return Path.Combine(taskBarPath, "EverythingToolbar.lnk");
+        }
+
+        public static bool IsTaskbarCenterAligned()
+        {
+            if (ToolbarSettings.User.IsForceCenterAlignment)
+                return true;
+
+            if (Helpers.Utils.GetWindowsVersion() < Helpers.Utils.WindowsVersion.Windows11)
+                return false;
+
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"))
+            {
+                var taskbarAlignment = key?.GetValue("TaskbarAl");
+                var leftAligned = taskbarAlignment != null && (int)taskbarAlignment == 0;
+                return !leftAligned;
+            }
         }
 
         public static bool GetWindowsSearchEnabledState()
         {
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Search"))
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Search"))
             {
-                object registryValueObject = key?.GetValue("SearchboxTaskbarMode");
-                return registryValueObject != null && (int)registryValueObject > 0;
+                var searchboxTaskbarMode = key?.GetValue("SearchboxTaskbarMode");
+                return searchboxTaskbarMode != null && (int)searchboxTaskbarMode > 0;
             }
         }
 
         public static void SetWindowsSearchEnabledState(bool enabled)
         {
-            Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", enabled ? 1 : 0);
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Search", RegistryKeyPermissionCheck.ReadWriteSubTree))
+            {
+                try
+                {
+                    key?.SetValue("SearchboxTaskbarMode", enabled ? 1 : 0);
+                }
+                catch (Exception e)
+                {
+                    Logger.Error(e, "Failed to set taskbar search icon mode.");
+                }
+            }
         }
 
         public static bool GetAutostartState()
         {
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run"))
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run"))
             {
-                object registryValueObject = key?.GetValue("EverythingToolbar");
-                return registryValueObject != null;
+                return key?.GetValue("EverythingToolbar") != null;
             }
         }
 
         public static void SetAutostartState(bool enabled)
         {
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-
-            if (enabled)
-                key.SetValue("EverythingToolbar", "\"" + Process.GetCurrentProcess().MainModule.FileName + "\"");
-            else
-                key.DeleteValue("EverythingToolbar", false);
-        }
-
-        public static WindowsTheme GetWindowsTheme()
-        {
-            bool systemUsesLightTheme;
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
+            using (var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", RegistryKeyPermissionCheck.ReadWriteSubTree))
             {
-                object registryValueObject = key?.GetValue("SystemUsesLightTheme");
-                systemUsesLightTheme = registryValueObject != null && (int)registryValueObject > 0;
+                try
+                {
+                    if (enabled)
+                        key?.SetValue("EverythingToolbar", "\"" + Process.GetCurrentProcess().MainModule.FileName + "\"");
+                    else
+                        key?.DeleteValue("EverythingToolbar", false);
+                }
+                catch (Exception e)
+                {
+                    Logger.Error(e, "Failed to set autostart state.");
+                }
             }
-
-            return systemUsesLightTheme ? WindowsTheme.Light : WindowsTheme.Dark;
         }
 
-        public static string GetIconPath(WindowsTheme theme)
+        public static void ChangeTaskbarPinIcon(string iconName)
         {
-            string processPath = Process.GetCurrentProcess().MainModule.FileName;
-            return Directory.GetParent(processPath).FullName + "\\Icons\\" + theme.ToString() + ".ico";
-        }
+            var taskbarShortcutPath = GetTaskbarShortcutPath();
 
-        public static string GetThemedIconPath()
-        {
-            return GetIconPath(GetWindowsTheme());
-        }
+            if (File.Exists(taskbarShortcutPath))
+                File.Delete(taskbarShortcutPath);
 
-        public static void ChangeTaskbarPinIcon(WindowsTheme theme)
-        {
-            string taskbarShortcutPath = GetTaskbarShortcutPath();
-
-            if (System.IO.File.Exists(taskbarShortcutPath))
-                System.IO.File.Delete(taskbarShortcutPath);
-
-            WshShell shell = new WshShell();
-            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(taskbarShortcutPath);
+            var shell = new WshShell();
+            var shortcut = (IWshShortcut)shell.CreateShortcut(taskbarShortcutPath);
             shortcut.TargetPath = Process.GetCurrentProcess().MainModule.FileName;
-            shortcut.IconLocation = GetIconPath(theme);
+            shortcut.IconLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, iconName);
             shortcut.Save();
 
-            foreach (Process process in Process.GetProcessesByName("explorer"))
+            foreach (var process in Process.GetProcessesByName("explorer"))
             {
                 process.Kill();
             }

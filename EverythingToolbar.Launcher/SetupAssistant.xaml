@@ -1,35 +1,103 @@
-﻿<Window x:Class="EverythingToolbar.Launcher.TaskbarPinGuide"
+﻿<Window x:Class="EverythingToolbar.Launcher.SetupAssistant"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:b="clr-namespace:EverythingToolbar.Behaviors;assembly=EverythingToolbar"
         xmlns:properties="clr-namespace:EverythingToolbar.Launcher.Properties"
         WindowStartupLocation="CenterScreen"
-        Background="#202020" Foreground="White"
-        SizeToContent="Height" ResizeMode="NoResize"
+        Height="450"
+        Background="Transparent"
+        WindowStyle="ToolWindow"
         Title="{x:Static properties:Resources.SetupAssistantTitle}"
-        Closed="OnClosed" Width="575">
+        Closed="OnClosed"
+        Closing="OnClosing"
+        Foreground="White"
+        Width="575">
+
+    <i:Interaction.Behaviors>
+        <b:FlowDirectionAwareness />
+        <b:MicaWindow />
+    </i:Interaction.Behaviors>
 
     <Window.Resources>
-        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#FF373737"/>
+        <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Margin" Value="0, 0, 0, 10" />
+        </Style>
+
+        <Style x:Key="ButtonStyle"
+               TargetType="{x:Type Button}">
+            <Setter Property="Background"
+                    Value="#19ffffff" />
+            <Setter Property="Foreground"
+                    Value="White" />
+            <Setter Property="FontSize"
+                    Value="15" />
+            <Setter Property="SnapsToDevicePixels"
+                    Value="True" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="ContentPresenterBorder" CornerRadius="4" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="#3a3a3a">
+                        <Border x:Name="ContentPresenterBorder"
+                                CornerRadius="4"
+                                BorderBrush="#77545454"
+                                BorderThickness="1"
+                                Background="{TemplateBinding Background}">
                             <Grid>
-                                <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                                <ContentPresenter Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Margin="0,0,0,0" />
                             </Grid>
                         </Border>
 
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ContentPresenterBorder" Property="Background" Value="#3c3c3c" />
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="ContentPresenterBorder"
+                                        Property="Background"
+                                        Value="#20ffffff" />
                             </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="ContentPresenterBorder"
+                                        Property="Background"
+                                        Value="#14ffffff" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled"
+                                     Value="False">
+                                <Setter TargetName="ContentPresenterBorder"
+                                        Property="Opacity"
+                                        Value="0.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ContentPresenterBorder" Property="Background" Value="#2a2a2a" />
+        <Style x:Key="RadioButtonVerticalStyle" TargetType="{x:Type RadioButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Border x:Name="border"
+                                BorderBrush="#771D1D1D"
+                                BorderThickness="1"
+                                Background="#0cffffff"
+                                CornerRadius="4"
+                                Padding="10"
+                                Margin="10">
+                            <Image x:Name="icon"
+                                   Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}"
+                                   Margin="25"
+                                   RenderOptions.BitmapScalingMode="Fant" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#10ffffff" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#1cffffff" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -39,33 +107,151 @@
 
     </Window.Resources>
 
-    <StackPanel Margin="20, 10">
-        <StackPanel>
-            <TextBlock FontSize="14" Text="{x:Static properties:Resources.SetupAssistantFirstStepTitle}" FontWeight="Medium" Margin="0, 10" />
-            <Border BorderBrush="#1D1D1D" BorderThickness="1" Background="#2b2b2b" CornerRadius="4" Padding="15" Margin="0, 0, 0, 10">
-                <StackPanel>
-                    <TextBlock Margin="0, 0, 0, 10" TextWrapping="Wrap" Text="{x:Static properties:Resources.SetupAssistantFirstStepText}" />
-                    <Image Source="Images/PinToTaskbar.png" Width="502" Height="217" />
-                </StackPanel>
-            </Border>
-        </StackPanel>
+    <Grid Margin="20, 15, 20, 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
 
-        <StackPanel x:Name="OptionalSettingsBlock">
-            <TextBlock FontSize="14" Text="{x:Static properties:Resources.SetupAssistantSecondStepTitle}" FontWeight="Medium" Margin="0, 10" />
-            <Border BorderBrush="#1D1D1D" BorderThickness="1" Background="#2b2b2b" CornerRadius="4" Padding="10" Margin="0, 0, 0, 10">
+        <TabControl Name="PaginationTabControl" Background="Transparent" BorderThickness="0">
+
+            <TabItem Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="14" Grid.Row="0"
+                               Text="{x:Static properties:Resources.SetupAssistantFirstStepTitle}"
+                               FontWeight="Medium" />
+                    <TextBlock Grid.Row="1"
+                               TextWrapping="Wrap"
+                               Text="{x:Static properties:Resources.SetupAssistantFirstStepText}" />
+                    <UniformGrid  Name="IconRadioButtons" VerticalAlignment="Center" Rows="1" Grid.Row="2">
+                        <RadioButton GroupName="Icon"
+                                     Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                     Style="{StaticResource RadioButtonVerticalStyle}"
+                                     Tag="Icons/Dark.ico"
+                                     Checked="OnIconRadioButtonChecked" />
+                        <RadioButton GroupName="Icon"
+                                     Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                     Style="{StaticResource RadioButtonVerticalStyle}"
+                                     Tag="Icons/Light.ico"
+                                     Checked="OnIconRadioButtonChecked" />
+                        <RadioButton GroupName="Icon"
+                                     Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+                                     Style="{StaticResource RadioButtonVerticalStyle}"
+                                     Tag="Icons/Medium.ico"
+                                     Checked="OnIconRadioButtonChecked" />
+                    </UniformGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="14"
+                               Grid.Row="0"
+                               Text="{x:Static properties:Resources.SetupAssistantSecondStepTitle}"
+                               FontWeight="Medium" />
+                    <TextBlock Grid.Row="1"
+                               TextWrapping="Wrap"
+                               Text="{x:Static properties:Resources.SetupAssistantSecondStepText}" />
+                    <Image Grid.Row="2" Source="Images/PinToTaskbar.png" Margin="0, 0, 0, 10" />
+                </Grid>
+            </TabItem>
+
+            <TabItem Visibility="Collapsed">
                 <StackPanel>
-                    <TextBlock Margin="0, 0, 0, 10" TextWrapping="Wrap" Text="{x:Static properties:Resources.SetupAssistantSecondStepText}" />
-                    <CheckBox x:Name="HideWindowsSearchCheckBox" Content="{x:Static properties:Resources.CheckboxHide}" Foreground="White" Checked="HideWindowsSearchChanged" Unchecked="HideWindowsSearchChanged" />
+                    <TextBlock FontSize="14"
+                               Text="{x:Static properties:Resources.SetupAssistantThirdStepTitle}"
+                               FontWeight="Medium" />
+                    <Border BorderBrush="#771D1D1D"
+                            BorderThickness="1"
+                            Background="#0cffffff"
+                            CornerRadius="4"
+                            Padding="10">
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap"
+                                       Text="{x:Static properties:Resources.SetupAssistantThirdStepText}" />
+                            <CheckBox x:Name="HideWindowsSearchCheckBox"
+                                      Foreground="White"
+                                      Content="{x:Static properties:Resources.CheckboxHide}"
+                                      Checked="HideWindowsSearchChanged"
+                                      Unchecked="HideWindowsSearchChanged" />
+                        </StackPanel>
+                    </Border>
+                    <TextBlock FontSize="14"
+                               Text="{x:Static properties:Resources.SetupAssistantFourthStepTitle}"
+                               FontWeight="Medium"
+                               Margin="0, 20, 0, 10" />
+                    <Border BorderBrush="#771D1D1D"
+                            BorderThickness="1"
+                            Background="#0cffffff"
+                            CornerRadius="4"
+                            Padding="10">
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap"
+                                       Text="{x:Static properties:Resources.SetupAssistantFourthStepText}" />
+                            <CheckBox x:Name="AutostartCheckBox"
+                                      Foreground="White"
+                                      Content="{x:Static properties:Resources.CheckboxEnable}"
+                                      Checked="AutostartChanged"
+                                      Unchecked="AutostartChanged" />
+                        </StackPanel>
+                    </Border>
+                    <TextBlock FontSize="14"
+                               Text="{x:Static properties:Resources.SetupAssistantFifthStepTitle}"
+                               FontWeight="Medium"
+                               Margin="0, 20, 0, 10" />
+                    <Border BorderBrush="#771D1D1D"
+                            BorderThickness="1"
+                            Background="#0cffffff"
+                            CornerRadius="4"
+                            Padding="10">
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap"
+                                       Text="{x:Static properties:Resources.SetupAssistantFifthStepText}" />
+                            <CheckBox x:Name="TrayIconCheckBox"
+                                      Foreground="White"
+                                      Content="{x:Static properties:Resources.CheckboxEnable}"
+                                      Checked="TrayIconChanged"
+                                      Unchecked="TrayIconChanged" />
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
-            </Border>
-            <TextBlock FontSize="14" Text="{x:Static properties:Resources.SetupAssistantThirdStepTitle}" FontWeight="Medium" Margin="0, 10" />
-            <Border BorderBrush="#1D1D1D" BorderThickness="1" Background="#2b2b2b" CornerRadius="4" Padding="10" Margin="0, 0, 0, 10">
-                <StackPanel>
-                    <TextBlock Margin="0, 0, 0, 10" TextWrapping="Wrap" Text="{x:Static properties:Resources.SetupAssistantThirdStepText}" />
-                    <CheckBox x:Name="AutostartCheckBox" Content="{x:Static properties:Resources.CheckboxEnable}" Foreground="White" Checked="AutostartChanged" Unchecked="AutostartChanged" />
-                </StackPanel>
-            </Border>
-            <Button Style="{StaticResource ButtonStyle}" Margin="0, 10" Height="42" Width="88" Background="#FF373737" Foreground="White" BorderBrush="{x:Null}" Click="OnCloseClicked" Content="{x:Static properties:Resources.ButtonClose}" />
-        </StackPanel>
-    </StackPanel>
+            </TabItem>
+
+        </TabControl>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <Button Style="{StaticResource ButtonStyle}"
+                    Click="OnCloseClicked"
+                    Content="{x:Static properties:Resources.ButtonClose}" />
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="PaginationLabel" />
+            <Button Grid.Column="2"
+                    Style="{StaticResource ButtonStyle}" Content="&#xe76b;"
+                    FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
+                    Click="OnPreviousPageClicked" Margin="0, 0, 3, 0"
+                    Name="PreviousButton" />
+            <Button Grid.Column="3"
+                    Margin="3, 0, 0, 0"
+                    Style="{StaticResource ButtonStyle}" Content="&#xe76c;"
+                    FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
+                    Click="OnNextPageClicked"
+                    Name="NextButton" />
+        </Grid>
+    </Grid>
+
 </Window>

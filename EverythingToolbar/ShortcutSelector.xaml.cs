@@ -1,12 +1,13 @@
-﻿using EverythingToolbar.Helpers;
-using NHotkey.Wpf;
+﻿using System;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using EverythingToolbar.Helpers;
+using NHotkey.Wpf;
 
 namespace EverythingToolbar
 {
-    public partial class ShortcutSelector : Window
+    public partial class ShortcutSelector
     {
         public Key Key { get; private set; }
         public ModifierKeys Modifiers { get; private set; }
@@ -19,8 +20,8 @@ namespace EverythingToolbar
             ShortcutManager.Instance.UnhookStartMenu();
             HotkeyManager.Current.IsEnabled = false;
 
-            Modifiers = (ModifierKeys)Properties.Settings.Default.shortcutModifiers;
-            Key = (Key)Properties.Settings.Default.shortcutKey;
+            Modifiers = (ModifierKeys)ToolbarSettings.User.ShortcutModifiers;
+            Key = (Key)ToolbarSettings.User.ShortcutKey;
             UpdateTextBox();
         }
 
@@ -43,8 +44,16 @@ namespace EverythingToolbar
                 default:
                     if (e.IsDown)
                     {
-                        Key = e.Key;
-                        Modifiers = TempMods;
+                        if (TempMods == ModifierKeys.None && e.Key == Key.Escape)
+                        {
+                            Key = Key.None;
+                            Modifiers = ModifierKeys.None;
+                        }
+                        else
+                        {
+                            Key = e.Key;
+                            Modifiers = TempMods;
+                        }
                     }
                     break;
             }
@@ -64,29 +73,33 @@ namespace EverythingToolbar
 
         private void UpdateTextBox()
         {
-            StringBuilder shortcutText = new StringBuilder();
+            var shortcutText = new StringBuilder();
             if ((Modifiers & ModifierKeys.Control) != 0)
             {
                 shortcutText.Append(Properties.Resources.KeyCtrl);
             }
             if ((Modifiers & ModifierKeys.Windows) != 0)
             {
-                shortcutText.Append(shortcutText.Length > 0 ? "+" : "");
+                if (shortcutText.Length > 0)
+                    shortcutText.Append("+");
                 shortcutText.Append(Properties.Resources.KeyWin);
             }
             if ((Modifiers & ModifierKeys.Alt) != 0)
             {
-                shortcutText.Append(shortcutText.Length > 0 ? "+" : "");
+                if (shortcutText.Length > 0)
+                    shortcutText.Append("+");
                 shortcutText.Append(Properties.Resources.KeyAlt);
             }
             if ((Modifiers & ModifierKeys.Shift) != 0)
             {
-                shortcutText.Append(shortcutText.Length > 0 ? "+" : "");
+                if (shortcutText.Length > 0)
+                    shortcutText.Append("+");
                 shortcutText.Append(Properties.Resources.KeyShift);
             }
             if (Key != Key.None)
             {
-                shortcutText.Append(shortcutText.Length > 0 ? "+" : "");
+                if (shortcutText.Length > 0)
+                    shortcutText.Append("+");
                 shortcutText.Append(Key.ToString());
             }
 
@@ -99,11 +112,11 @@ namespace EverythingToolbar
             Close();
         }
 
-        private void OnClosed(object sender, System.EventArgs e)
+        private void OnClosed(object sender, EventArgs e)
         {
             HotkeyManager.Current.IsEnabled = true;
             ShortcutManager.Instance.ReleaseKeyboard();
-            if (Properties.Settings.Default.isReplaceStartMenuSearch)
+            if (ToolbarSettings.User.IsReplaceStartMenuSearch)
             {
                 ShortcutManager.Instance.HookStartMenu();
             }

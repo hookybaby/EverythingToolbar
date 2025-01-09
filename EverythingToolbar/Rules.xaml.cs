@@ -1,28 +1,29 @@
-﻿using EverythingToolbar.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 using System.Xml.Serialization;
+using EverythingToolbar.Data;
+using EverythingToolbar.Helpers;
 
 namespace EverythingToolbar
 {
-    public partial class Rules : Window
+    public partial class Rules
     {
-        static List<Rule> rules = new List<Rule>();
-        static string rulesPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EverythingToolbar", "rules.xml");
+        private static List<Rule> _rules = new List<Rule>();
+        private static string RulesPath => Path.Combine(Utils.GetConfigDirectory(), "rules.xml");
 
         public Rules()
         {
             InitializeComponent();
 
-            rules = LoadRules();
-            dataGrid.ItemsSource = rules;
-            autoApplyRulesCheckbox.IsChecked = Properties.Settings.Default.isAutoApplyRules;
+            _rules = LoadRules();
+            dataGrid.ItemsSource = _rules;
+            autoApplyRulesCheckbox.IsChecked = ToolbarSettings.User.IsAutoApplyRules;
             UpdateUI();
         }
 
@@ -33,20 +34,19 @@ namespace EverythingToolbar
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            if(SaveRules(rules, (bool)autoApplyRulesCheckbox.IsChecked))
+            if(SaveRules(_rules, (bool)autoApplyRulesCheckbox.IsChecked))
             {
-                Properties.Settings.Default.isAutoApplyRules = (bool)autoApplyRulesCheckbox.IsChecked;
-                Properties.Settings.Default.Save();
+                ToolbarSettings.User.IsAutoApplyRules = (bool)autoApplyRulesCheckbox.IsChecked;
                 Close();
             }
         }
 
         public static List<Rule> LoadRules()
         {
-            if (File.Exists(rulesPath))
+            if (File.Exists(RulesPath))
             {
-                var serializer = new XmlSerializer(rules.GetType());
-                using (var reader = XmlReader.Create(rulesPath))
+                var serializer = new XmlSerializer(_rules.GetType());
+                using (var reader = XmlReader.Create(RulesPath))
                 {
                     return (List<Rule>)serializer.Deserialize(reader);
                 }
@@ -74,9 +74,9 @@ namespace EverythingToolbar
                 return false;
             }
 
-            Directory.CreateDirectory(Path.GetDirectoryName(rulesPath));
+            Directory.CreateDirectory(Path.GetDirectoryName(RulesPath));
             var serializer = new XmlSerializer(newRules.GetType());
-            using (var writer = XmlWriter.Create(rulesPath))
+            using (var writer = XmlWriter.Create(RulesPath))
             {
                 serializer.Serialize(writer, newRules);
             }
@@ -86,23 +86,23 @@ namespace EverythingToolbar
 
         private void AddItem(object sender, RoutedEventArgs e)
         {
-            rules.Insert(rules.Count, new Rule() { Name = "", Type = FileType.Any, Expression = "", Command = "" });
+            _rules.Insert(_rules.Count, new Rule { Name = "", Type = FileType.Any, Expression = "", Command = "" });
             RefreshList();
-            dataGrid.SelectedIndex = rules.Count - 1;
+            dataGrid.SelectedIndex = _rules.Count - 1;
         }
 
         private void DeleteSelected(object sender, RoutedEventArgs e)
         {
-            int selectedIndex = dataGrid.SelectedIndex;
-            rules.RemoveAt(selectedIndex);
+            var selectedIndex = dataGrid.SelectedIndex;
+            _rules.RemoveAt(selectedIndex);
             RefreshList();
-            if (rules.Count > selectedIndex)
+            if (_rules.Count > selectedIndex)
             {
                 dataGrid.SelectedIndex = selectedIndex;
             }
-            else if (rules.Count > 0)
+            else if (_rules.Count > 0)
             {
-                dataGrid.SelectedIndex = rules.Count - 1;
+                dataGrid.SelectedIndex = _rules.Count - 1;
             }
         }
 
@@ -118,15 +118,15 @@ namespace EverythingToolbar
 
         private void MoveItem(int delta)
         {
-            int selectedIndex = dataGrid.SelectedIndex;
-            Rule item = dataGrid.SelectedItem as Rule;
-            rules.RemoveAt(selectedIndex);
-            rules.Insert(selectedIndex + delta, item);
+            var selectedIndex = dataGrid.SelectedIndex;
+            var item = dataGrid.SelectedItem as Rule;
+            _rules.RemoveAt(selectedIndex);
+            _rules.Insert(selectedIndex + delta, item);
             RefreshList();
             dataGrid.SelectedIndex = selectedIndex + delta;
         }
 
-        private void DataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateUI();
         }
@@ -134,13 +134,13 @@ namespace EverythingToolbar
         private void RefreshList()
         {
             dataGrid.ItemsSource = null;
-            dataGrid.ItemsSource = rules;
+            dataGrid.ItemsSource = _rules;
         }
 
         private void UpdateUI()
         {
             DeleteButton.IsEnabled = dataGrid.SelectedIndex >= 0;
-            MoveDownButton.IsEnabled = dataGrid.SelectedIndex + 1 < rules.Count && dataGrid.SelectedIndex >= 0;
+            MoveDownButton.IsEnabled = dataGrid.SelectedIndex + 1 < _rules.Count && dataGrid.SelectedIndex >= 0;
             MoveUpButton.IsEnabled = dataGrid.SelectedIndex > 0;
 
             if ((bool)autoApplyRulesCheckbox.IsChecked)
@@ -165,12 +165,12 @@ namespace EverythingToolbar
             if (searchResult == null)
                 return false;
 
-            if (Properties.Settings.Default.isAutoApplyRules && string.IsNullOrEmpty(command))
+            if (ToolbarSettings.User.IsAutoApplyRules && string.IsNullOrEmpty(command))
             {
-                foreach (Rule r in LoadRules())
+                foreach (var r in LoadRules())
                 {
-                    bool regexCond = !string.IsNullOrEmpty(r.Expression) && Regex.IsMatch(searchResult.FullPathAndFileName, r.Expression);
-                    bool typeCond = searchResult.IsFile && r.Type != FileType.Folder || !searchResult.IsFile && r.Type != FileType.File;
+                    var regexCond = !string.IsNullOrEmpty(r.Expression) && Regex.IsMatch(searchResult.FullPathAndFileName, r.Expression);
+                    var typeCond = searchResult.IsFile && r.Type != FileType.Folder || !searchResult.IsFile && r.Type != FileType.File;
                     if (regexCond && typeCond)
                     {
                         command = r.Command;

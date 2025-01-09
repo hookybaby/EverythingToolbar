@@ -1,0 +1,55 @@
+name: Publish release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build-release:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Install NuGet
+        uses: nuget/setup-nuget@v1
+
+      - name: Restore NuGet dependencies
+        run: nuget restore
+
+      - name: Decode certificate
+        shell: bash
+        run: echo ${{ secrets.PFX_CERTIFICATE_FILE }} | base64 --decode  > ./EverythingToolbar.snk
+
+      - name: Build all
+        run: MSBuild $Env:GITHUB_WORKSPACE /p:Configuration=Release
+
+      - name: Rename msi
+        shell: bash
+        run: mv EverythingToolbar.Installer/bin/x64/Release/EverythingToolbar.msi EverythingToolbar-${{ github.ref_name }}.msi
+
+      - name: Generate SHA-256 checksum
+        shell: bash
+        run: sha256sum EverythingToolbar-${{ github.ref_name }}.msi > EverythingToolbar-${{ github.ref_name }}.sha256
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: EverythingToolbar ${{ github.ref_name }}
+          path: |
+            EverythingToolbar-${{ github.ref_name }}.msi
+            EverythingToolbar-${{ github.ref_name }}.sha256
+
+      - name: Create release draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" `
+            "EverythingToolbar-${{ github.ref_name }}.msi" `
+            "EverythingToolbar-${{ github.ref_name }}.sha256" `
+            --draft `
+            --title "${{ github.ref_name }}"

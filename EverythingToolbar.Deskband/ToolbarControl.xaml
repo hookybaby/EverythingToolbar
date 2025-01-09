@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="EverythingToolbar.ToolbarControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:b="clr-namespace:EverythingToolbar.Behaviors;assembly=EverythingToolbar"
+             xmlns:controls="clr-namespace:EverythingToolbar.Controls;assembly=EverythingToolbar"
+             xmlns:converters="clr-namespace:EverythingToolbar.Deskband.Converters"
+             HorizontalAlignment="Stretch"
+             KeyDown="OnKeyDown"
+             GotFocus="OnGotFocus">
+    
+    <i:Interaction.Behaviors>
+        <b:DpiScaling />
+        <b:ThemeAwareness />
+    </i:Interaction.Behaviors>
+
+    <UserControl.Resources>
+        <converters:SearchControlVisibilityConverter
+            x:Key="SearchButtonDoubleToVisibilityConverter"
+            VisibilityThreshold="-70"
+            AlwaysVisibleWithAutoHidingTaskbar="True" />
+        <converters:SearchControlVisibilityConverter
+            x:Key="SearchBoxDoubleToVisibilityConverter"
+            VisibilityThreshold="70"
+            AlwaysVisibleWithAutoHidingTaskbar="False" />
+    </UserControl.Resources>
+
+    <Grid>
+        <TextBox Opacity="0"
+                 IsHitTestVisible="False"
+                 Name="KeyboardFocusCapture" />
+
+        <controls:SearchBox x:Name="SearchBox"
+                            Visibility="{Binding Path=ActualWidth,
+                                                 RelativeSource={RelativeSource Self},
+                                                 Converter={StaticResource SearchBoxDoubleToVisibilityConverter}}" />
+
+        <controls:SearchButton Visibility="{Binding Path=ActualWidth,
+                                                    RelativeSource={RelativeSource Self},  
+                                                    Converter={StaticResource SearchButtonDoubleToVisibilityConverter}}" />
+    </Grid>
+    
+</UserControl>

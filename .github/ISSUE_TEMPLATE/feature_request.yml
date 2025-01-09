@@ -1,14 +1,12 @@
 name: Feature request
 description: Suggest an idea for this project
-title: "Feature: "
-labels: []
 body:
   - type: checkboxes
     attributes:
       label: Preflight Checklist
       description: Please ensure you've completed all of the following.
       options:
-        - label: I have searched all [open and closed issues](https://github.com/stnkl/EverythingToolbar/issues?q=) for the same feature request without success.
+        - label: I have searched all [open and closed issues](https://github.com/srwi/EverythingToolbar/issues?q=) for the same feature request without success.
           required: true
   - type: textarea
     attributes:

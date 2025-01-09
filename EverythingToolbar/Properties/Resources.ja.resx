@@ -151,7 +151,7 @@
     <value>パスを開く</value>
   </data>
   <data name="ContextMenuOpenWinContext" xml:space="preserve">
-    <value>Show more options</value>
+    <value>詳細設定を表示</value>
   </data>
   <data name="ContextMenuOpenWith" xml:space="preserve">
     <value>アプリで開く</value>
@@ -285,7 +285,7 @@
   <data name="RulesWindowTitle" xml:space="preserve">
     <value>ルール</value>
   </data>
-  <data name="SearchBoxWatermark" xml:space="preserve">
+  <data name="TextBoxWatermark" xml:space="preserve">
     <value>Everything で検索</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
@@ -325,13 +325,16 @@
     <value>正規表現</value>
   </data>
   <data name="SettingsRememberFilter" xml:space="preserve">
-    <value>フィルタを記憶する</value>
+    <value>フィルターを保存</value>
   </data>
   <data name="SettingsReplaceStartMenuSearch" xml:space="preserve">
     <value>スタートメニューの検索を置き換える (実験的)</value>
   </data>
   <data name="SettingsRules" xml:space="preserve">
     <value>ルール...</value>
+  </data>
+  <data name="SettingsSetInstanceName" xml:space="preserve">
+    <value>インスタンス名を設定...</value>
   </data>
   <data name="SettingsShowQuickToggles" xml:space="preserve">
     <value>検索時にクイックトグルを表示</value>
@@ -345,8 +348,11 @@
   <data name="SettingsTheme" xml:space="preserve">
     <value>テーマ</value>
   </data>
+  <data name="SettingsThemeAuto" xml:space="preserve">
+    <value>テーマを同期</value>
+  </data>
   <data name="SettingsThumbnailsEnabled" xml:space="preserve">
-    <value>サムネイルを有効</value>
+    <value>サムネイルを有効化</value>
   </data>
   <data name="SettingsUseEverythingFilters" xml:space="preserve">
     <value>Everything のフィルタを使用</value>
@@ -360,83 +366,44 @@
   <data name="ShortcutWindowTitle" xml:space="preserve">
     <value>ショートカットを入力...</value>
   </data>
-  <data name="SortByAttributesAscending" xml:space="preserve">
-    <value>属性 昇順</value>
+  <data name="SortByAttributes" xml:space="preserve">
+    <value>属性</value>
   </data>
-  <data name="SortByAttributesDescending" xml:space="preserve">
-    <value>属性 降順</value>
+  <data name="SortByDateAccessed" xml:space="preserve">
+    <value>アクセス日時</value>
   </data>
-  <data name="SortByDateAccessedAscending" xml:space="preserve">
-    <value>アクセス日時 昇順</value>
+  <data name="SortByDateCreated" xml:space="preserve">
+    <value>作成日時</value>
   </data>
-  <data name="SortByDateAccessedDescending" xml:space="preserve">
-    <value>アクセス日時 降順</value>
+  <data name="SortByDateModified" xml:space="preserve">
+    <value>変更日時</value>
   </data>
-  <data name="SortByDateCreatedAscending" xml:space="preserve">
-    <value>作成日時 昇順</value>
+  <data name="SortByDateRecentlyChanged" xml:space="preserve">
+    <value>更新日時</value>
   </data>
-  <data name="SortByDateCreatedDescending" xml:space="preserve">
-    <value>作成日時 降順</value>
+  <data name="SortByDateRun" xml:space="preserve">
+    <value>実行日時</value>
   </data>
-  <data name="SortByDateModifiedAscending" xml:space="preserve">
-    <value>変更日時 昇順</value>
+  <data name="SortByExtension" xml:space="preserve">
+    <value>拡大</value>
   </data>
-  <data name="SortByDateModifiedDescending" xml:space="preserve">
-    <value>変更日時 降順</value>
+  <data name="SortByFileListFilename" xml:space="preserve">
+    <value>ファイルの名前</value>
   </data>
-  <data name="SortByDateRecentlyChangedAscending" xml:space="preserve">
-    <value>最近更新日時 昇順</value>
+  <data name="SortByName" xml:space="preserve">
+    <value>ファイル名</value>
   </data>
-  <data name="SortByDateRecentlyChangedDescending" xml:space="preserve">
-    <value>最近更新日時 降順</value>
+  <data name="SortByPath" xml:space="preserve">
+    <value>ファイルパス</value>
   </data>
-  <data name="SortByDateRunAscending" xml:space="preserve">
-    <value>実行日時 昇順</value>
+  <data name="SortByRunCount" xml:space="preserve">
+    <value>実行回数</value>
   </data>
-  <data name="SortByDateRunDescending" xml:space="preserve">
-    <value>実行日時 降順</value>
+  <data name="SortBySize" xml:space="preserve">
+    <value>サイズ</value>
   </data>
-  <data name="SortByExtensionAscending" xml:space="preserve">
-    <value>拡張子 昇順</value>
-  </data>
-  <data name="SortByExtensionDescending" xml:space="preserve">
-    <value>拡張子 降順</value>
-  </data>
-  <data name="SortByFileListFilenameAscending" xml:space="preserve">
-    <value>ファイルリストのファイル名 昇順</value>
-  </data>
-  <data name="SortByFileListFilenameDescending" xml:space="preserve">
-    <value>ファイルリストのファイル名 降順</value>
-  </data>
-  <data name="SortByNameAscending" xml:space="preserve">
-    <value>名前 昇順</value>
-  </data>
-  <data name="SortByNameDescending" xml:space="preserve">
-    <value>名前 降順</value>
-  </data>
-  <data name="SortByPathAscending" xml:space="preserve">
-    <value>パス 昇順</value>
-  </data>
-  <data name="SortByPathDescending" xml:space="preserve">
-    <value>パス 降順</value>
-  </data>
-  <data name="SortByRunCountAscending" xml:space="preserve">
-    <value>実行回数 昇順</value>
-  </data>
-  <data name="SortByRunCountDescending" xml:space="preserve">
-    <value>実行回数 降順</value>
-  </data>
-  <data name="SortBySizeAscending" xml:space="preserve">
-    <value>サイズ 昇順</value>
-  </data>
-  <data name="SortBySizeDescending" xml:space="preserve">
-    <value>サイズ 降順</value>
-  </data>
-  <data name="SortByTypeNameAscending" xml:space="preserve">
-    <value>タイプ名 昇順</value>
-  </data>
-  <data name="SortByTypeNameDescending" xml:space="preserve">
-    <value>タイプ名 降順</value>
+  <data name="SortByTypeName" xml:space="preserve">
+    <value>タイプ名</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
     <value>ダーク</value>
@@ -464,5 +431,32 @@
   </data>
   <data name="UserFilterVideo" xml:space="preserve">
     <value>ビデオ</value>
+  </data>
+  <data name="UpdateBannerText" xml:space="preserve">
+    <value>利用可能なアップデート:</value>
+  </data>
+  <data name="UpdateBannerSkip" xml:space="preserve">
+    <value>スキップ</value>
+  </data>
+  <data name="UpdateBannerDownload" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>アップデートを自動で確認する</value>
+  </data>
+  <data name="SettingsSelectFirstResult" xml:space="preserve">
+    <value>最初の結果を選択する</value>
+  </data>
+  <data name="SettingsDoubleClickToOpen" xml:space="preserve">
+    <value>ダブルクリックで開く</value>
+  </data>
+  <data name="SortDescending" xml:space="preserve">
+    <value>降順</value>
+  </data>
+  <data name="SortAscending" xml:space="preserve">
+    <value>昇順</value>
+  </data>
+  <data name="SettingsSearchAsYouType" xml:space="preserve">
+    <value>入力して検索</value>
   </data>
 </root>

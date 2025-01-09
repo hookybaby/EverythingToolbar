@@ -19,7 +19,7 @@ namespace EverythingToolbar.Launcher.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -106,7 +106,43 @@ namespace EverythingToolbar.Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To pin EverythingToolbar to the taskbar right click its icon and select &apos;Pin to taskbar&apos;..
+        ///   Looks up a localized string similar to Are you sure you want to exit the setup assistant? EverythingToolbar will only be accessible using the keyboard shortcut. You can access the setup assistant again via the system tray icon to pin the search icon to the taskbar..
+        /// </summary>
+        public static string SetupAssistantDisableWarningText {
+            get {
+                return ResourceManager.GetString("SetupAssistantDisableWarningText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit Setup Assistant.
+        /// </summary>
+        public static string SetupAssistantDisableWarningTitle {
+            get {
+                return ResourceManager.GetString("SetupAssistantDisableWarningTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By enabling the system tray icon you can quit the EverythingToolbar background process at any time. Without it, EverythingToolbar can always be quit via the task manager..
+        /// </summary>
+        public static string SetupAssistantFifthStepText {
+            get {
+                return ResourceManager.GetString("SetupAssistantFifthStepText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5. Configure system tray icon.
+        /// </summary>
+        public static string SetupAssistantFifthStepTitle {
+            get {
+                return ResourceManager.GetString("SetupAssistantFifthStepTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select one of the following taskbar icons:.
         /// </summary>
         public static string SetupAssistantFirstStepText {
             get {
@@ -115,11 +151,29 @@ namespace EverythingToolbar.Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1. Pin to taskbar.
+        ///   Looks up a localized string similar to 1. Taskbar icon.
         /// </summary>
         public static string SetupAssistantFirstStepTitle {
             get {
                 return ResourceManager.GetString("SetupAssistantFirstStepTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is recommended to start EverythingToolbar automatically on system startup..
+        /// </summary>
+        public static string SetupAssistantFourthStepText {
+            get {
+                return ResourceManager.GetString("SetupAssistantFourthStepText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4. Configure autostart.
+        /// </summary>
+        public static string SetupAssistantFourthStepTitle {
+            get {
+                return ResourceManager.GetString("SetupAssistantFourthStepTitle", resourceCulture);
             }
         }
         
@@ -142,7 +196,7 @@ namespace EverythingToolbar.Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optionally the original Windows search icon can be hidden..
+        ///   Looks up a localized string similar to To pin EverythingToolbar to the taskbar right click its icon and select &apos;Pin to taskbar&apos;..
         /// </summary>
         public static string SetupAssistantSecondStepText {
             get {
@@ -151,7 +205,7 @@ namespace EverythingToolbar.Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2. Hide Windows search.
+        ///   Looks up a localized string similar to 2. Pin to taskbar.
         /// </summary>
         public static string SetupAssistantSecondStepTitle {
             get {
@@ -160,7 +214,7 @@ namespace EverythingToolbar.Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is recommended to start EverythingToolbar automatically on system startup..
+        ///   Looks up a localized string similar to Optionally the original Windows search icon can be hidden..
         /// </summary>
         public static string SetupAssistantThirdStepText {
             get {
@@ -169,7 +223,7 @@ namespace EverythingToolbar.Launcher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 3. Configure autostart.
+        ///   Looks up a localized string similar to 3. Hide Windows search.
         /// </summary>
         public static string SetupAssistantThirdStepTitle {
             get {

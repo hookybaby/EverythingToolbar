@@ -1,22 +1,27 @@
 name: Bug report
 description: Create a bug report
-title: "Bug: "
-labels: []
 body:
 - type: checkboxes
   attributes:
     label: Preflight Checklist
     description: Please ensure you've completed all of the following.
     options:
-      - label: I have fully read the [README](https://github.com/stnkl/EverythingToolbar/blob/master/README.md) and it did not solve the problem.
+      - label: I have fully read the [README](https://github.com/srwi/EverythingToolbar/blob/master/README.md) and it did not solve the problem.
         required: true
-      - label: I have searched all [open and closed issues](https://github.com/stnkl/EverythingToolbar/issues?q=) for the same bug report without success.
+      - label: I have searched all [open and closed issues](https://github.com/srwi/EverythingToolbar/issues?q=) for the same bug report without success.
         required: true
 - type: input
   attributes:
     label: EverythingToolbar Version
     description: What version of EverythingToolbar are you using?
     placeholder: "e.g. 0.7.4"
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: Everything Version
+    description: What version of Everything are you using?
+    placeholder: "e.g. 1.4.1.1024 (x64)"
   validations:
     required: true
 - type: input

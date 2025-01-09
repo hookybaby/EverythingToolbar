@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.IO;
-using System.Windows.Interop;
-using System.Windows.Media.Imaging;
-using System.Windows;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
-namespace EverythingToolbar
+namespace EverythingToolbar.Helpers
 {
     [Flags]
     public enum ThumbnailOptions
@@ -50,7 +50,7 @@ namespace EverythingToolbar
             void GetDisplayName(SIGDN sigdnName, out IntPtr ppszName);
             void GetAttributes(uint sfgaoMask, out uint psfgaoAttribs);
             void Compare(IShellItem psi, uint hint, out int piOrder);
-        };
+        }
 
         internal enum SIGDN : uint
         {
@@ -82,7 +82,7 @@ namespace EverythingToolbar
             AccessDenied = unchecked((int)0x80030005)
         }
 
-        [ComImport()]
+        [ComImport]
         [Guid("bcc18b79-ba16-442f-80c4-8a59c30c463b")]
         [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         internal interface IShellItemImageFactory
@@ -102,7 +102,7 @@ namespace EverythingToolbar
 
             public int Width { set { width = value; } }
             public int Height { set { height = value; } }
-        };
+        }
 
 
         public static BitmapSource GetThumbnail(string fileName, int width, int height)
@@ -121,14 +121,14 @@ namespace EverythingToolbar
             var extension = Path.GetExtension(fileName).ToLower();
 
             ThumbnailOptions to;
-            if (Directory.Exists(fileName) || !Properties.Settings.Default.isThumbnailsEnabled)
+            if (Directory.Exists(fileName) || !ToolbarSettings.User.IsThumbnailsEnabled)
                 to = ThumbnailOptions.IconOnly;
             else if (ImageExtensions.Contains(extension) && File.Exists(fileName))
                 to = ThumbnailOptions.ThumbnailOnly;
             else
                 to = ThumbnailOptions.None;
 
-            IntPtr hBitmap = GetHBitmap(Path.GetFullPath(fileName), width, height, to);
+            var hBitmap = GetHBitmap(Path.GetFullPath(fileName), width, height, to);
 
             try
             {
@@ -149,19 +149,19 @@ namespace EverythingToolbar
 
         private static IntPtr GetHBitmap(string fileName, int width, int height, ThumbnailOptions options)
         {
-            Guid shellItem2Guid = new Guid(IShellItem2Guid);
-            int retCode = SHCreateItemFromParsingName(fileName, IntPtr.Zero, ref shellItem2Guid, out IShellItem nativeShellItem);
+            var shellItem2Guid = new Guid(IShellItem2Guid);
+            var retCode = SHCreateItemFromParsingName(fileName, IntPtr.Zero, ref shellItem2Guid, out var nativeShellItem);
 
             if (retCode != 0)
                 throw Marshal.GetExceptionForHR(retCode);
 
-            NativeSize nativeSize = new NativeSize
+            var nativeSize = new NativeSize
             {
                 Width = width,
                 Height = height
             };
 
-            HResult hr = ((IShellItemImageFactory)nativeShellItem).GetImage(nativeSize, options, out IntPtr hBitmap);
+            var hr = ((IShellItemImageFactory)nativeShellItem).GetImage(nativeSize, options, out var hBitmap);
 
             // if extracting image thumbnail and failed, extract shell icon
             if (options == ThumbnailOptions.ThumbnailOnly && hr == HResult.ExtractionFailed)

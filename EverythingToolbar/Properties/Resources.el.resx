@@ -285,7 +285,7 @@
   <data name="RulesWindowTitle" xml:space="preserve">
     <value>Κανόνες</value>
   </data>
-  <data name="SearchBoxWatermark" xml:space="preserve">
+  <data name="TextBoxWatermark" xml:space="preserve">
     <value>Αναζήτηση με το Everything</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
@@ -333,6 +333,9 @@
   <data name="SettingsRules" xml:space="preserve">
     <value>Κανόνες...</value>
   </data>
+  <data name="SettingsSetInstanceName" xml:space="preserve">
+    <value>Set instance name...</value>
+  </data>
   <data name="SettingsShowQuickToggles" xml:space="preserve">
     <value>Εμφάνιση γρήγορων ρυθμίσεων</value>
   </data>
@@ -344,6 +347,9 @@
   </data>
   <data name="SettingsTheme" xml:space="preserve">
     <value>Θέμα</value>
+  </data>
+  <data name="SettingsThemeAuto" xml:space="preserve">
+    <value>Sync theme</value>
   </data>
   <data name="SettingsThumbnailsEnabled" xml:space="preserve">
     <value>Enable thumbnails</value>
@@ -360,83 +366,44 @@
   <data name="ShortcutWindowTitle" xml:space="preserve">
     <value>Εισάγετε συντόμευση...</value>
   </data>
-  <data name="SortByAttributesAscending" xml:space="preserve">
-    <value>Χαρακτηριστικά αύξουσα</value>
+  <data name="SortByAttributes" xml:space="preserve">
+    <value>Attributes</value>
   </data>
-  <data name="SortByAttributesDescending" xml:space="preserve">
-    <value>Χαρακτηριστικά φθίνουσα</value>
+  <data name="SortByDateAccessed" xml:space="preserve">
+    <value>Date accessed</value>
   </data>
-  <data name="SortByDateAccessedAscending" xml:space="preserve">
-    <value>Ημερομηνία προσπέλασης αύξουσα</value>
+  <data name="SortByDateCreated" xml:space="preserve">
+    <value>Date created</value>
   </data>
-  <data name="SortByDateAccessedDescending" xml:space="preserve">
-    <value>Ημερομηνία προσπέλασης φθίνουσα</value>
+  <data name="SortByDateModified" xml:space="preserve">
+    <value>Date modified</value>
   </data>
-  <data name="SortByDateCreatedAscending" xml:space="preserve">
-    <value>Ημερομηνία δημιουργίας αύξουσα</value>
+  <data name="SortByDateRecentlyChanged" xml:space="preserve">
+    <value>Date recently changed</value>
   </data>
-  <data name="SortByDateCreatedDescending" xml:space="preserve">
-    <value>Ημερομηνία δημιουργίας φθίνουσα</value>
+  <data name="SortByDateRun" xml:space="preserve">
+    <value>Date run</value>
   </data>
-  <data name="SortByDateModifiedAscending" xml:space="preserve">
-    <value>Ημερομηνία τροποποίησης αύξουσα</value>
+  <data name="SortByExtension" xml:space="preserve">
+    <value>Extension</value>
   </data>
-  <data name="SortByDateModifiedDescending" xml:space="preserve">
-    <value>Ημερομηνία τροποποίησης φθίνουσα</value>
+  <data name="SortByFileListFilename" xml:space="preserve">
+    <value>File list filename</value>
   </data>
-  <data name="SortByDateRecentlyChangedAscending" xml:space="preserve">
-    <value>Ημερομηνία που άλλαξε πρόσφατα αύξουσα</value>
+  <data name="SortByName" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="SortByDateRecentlyChangedDescending" xml:space="preserve">
-    <value>Ημερομηνία που άλλαξε πρόσφατα φθίνουσα</value>
+  <data name="SortByPath" xml:space="preserve">
+    <value>Path</value>
   </data>
-  <data name="SortByDateRunAscending" xml:space="preserve">
-    <value>Ημερομηνία εκτέλεσης αύξουσα</value>
+  <data name="SortByRunCount" xml:space="preserve">
+    <value>Run count</value>
   </data>
-  <data name="SortByDateRunDescending" xml:space="preserve">
-    <value>Ημερομηνία εκτέλεσης φθίνουσα</value>
+  <data name="SortBySize" xml:space="preserve">
+    <value>Size</value>
   </data>
-  <data name="SortByExtensionAscending" xml:space="preserve">
-    <value>Προέκταση αύξουσα</value>
-  </data>
-  <data name="SortByExtensionDescending" xml:space="preserve">
-    <value>Επέκταση φθίνουσα</value>
-  </data>
-  <data name="SortByFileListFilenameAscending" xml:space="preserve">
-    <value>Όνομα αρχείου λίστας αρχείων αύξουσα</value>
-  </data>
-  <data name="SortByFileListFilenameDescending" xml:space="preserve">
-    <value>Όνομα αρχείου λίστας αρχείων φθίνουσα</value>
-  </data>
-  <data name="SortByNameAscending" xml:space="preserve">
-    <value>Όνομα αύξουσα</value>
-  </data>
-  <data name="SortByNameDescending" xml:space="preserve">
-    <value>Όνομα Φθίνουσα</value>
-  </data>
-  <data name="SortByPathAscending" xml:space="preserve">
-    <value>Διαδρομή αύξουσα</value>
-  </data>
-  <data name="SortByPathDescending" xml:space="preserve">
-    <value>Διαδρομή φθίνουσα</value>
-  </data>
-  <data name="SortByRunCountAscending" xml:space="preserve">
-    <value>Πλήθος εκτέλεσης αύξουσα</value>
-  </data>
-  <data name="SortByRunCountDescending" xml:space="preserve">
-    <value>Πλήθος εκτέλεσης φθίνουσα</value>
-  </data>
-  <data name="SortBySizeAscending" xml:space="preserve">
-    <value>Μέγεθος αύξουσα</value>
-  </data>
-  <data name="SortBySizeDescending" xml:space="preserve">
-    <value>Μέγεθος φθίνουσα</value>
-  </data>
-  <data name="SortByTypeNameAscending" xml:space="preserve">
-    <value>Όνομα τύπου αύξουσα</value>
-  </data>
-  <data name="SortByTypeNameDescending" xml:space="preserve">
-    <value>Όνομα τύπου φθίνουσα</value>
+  <data name="SortByTypeName" xml:space="preserve">
+    <value>Type name</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
     <value>Σκοτεινό</value>
@@ -464,5 +431,32 @@
   </data>
   <data name="UserFilterVideo" xml:space="preserve">
     <value>Βίντεο</value>
+  </data>
+  <data name="UpdateBannerText" xml:space="preserve">
+    <value>Update available:</value>
+  </data>
+  <data name="UpdateBannerSkip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="UpdateBannerDownload" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>Check for updates automatically</value>
+  </data>
+  <data name="SettingsSelectFirstResult" xml:space="preserve">
+    <value>Select first result</value>
+  </data>
+  <data name="SettingsDoubleClickToOpen" xml:space="preserve">
+    <value>Double-click to open</value>
+  </data>
+  <data name="SortDescending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="SortAscending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="SettingsSearchAsYouType" xml:space="preserve">
+    <value>Search as you type</value>
   </data>
 </root>

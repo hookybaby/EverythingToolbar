@@ -151,7 +151,7 @@
     <value>打开路径</value>
   </data>
   <data name="ContextMenuOpenWinContext" xml:space="preserve">
-    <value>Show more options</value>
+    <value>显示更多选项</value>
   </data>
   <data name="ContextMenuOpenWith" xml:space="preserve">
     <value>打开方式...</value>
@@ -190,7 +190,7 @@
     <value>紧凑（详细）</value>
   </data>
   <data name="ItemTemplateNormal" xml:space="preserve">
-    <value>正常</value>
+    <value>普通</value>
   </data>
   <data name="ItemTemplateNormalDetailed" xml:space="preserve">
     <value>普通（详细）</value>
@@ -214,7 +214,7 @@
     <value>错误</value>
   </data>
   <data name="MessageBoxFailedToCopyFile" xml:space="preserve">
-    <value>复制文件失败。</value>
+    <value>无法复制文件</value>
   </data>
   <data name="MessageBoxFailedToCopyPath" xml:space="preserve">
     <value>复制路径失败。</value>
@@ -285,11 +285,11 @@
   <data name="RulesWindowTitle" xml:space="preserve">
     <value>规则</value>
   </data>
-  <data name="SearchBoxWatermark" xml:space="preserve">
-    <value>用Everything 搜索</value>
+  <data name="TextBoxWatermark" xml:space="preserve">
+    <value>用 Everything 搜索</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
-    <value>对象</value>
+    <value>个对象</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>个对象</value>
@@ -333,17 +333,23 @@
   <data name="SettingsRules" xml:space="preserve">
     <value>规则...</value>
   </data>
+  <data name="SettingsSetInstanceName" xml:space="preserve">
+    <value>设置实例名称...</value>
+  </data>
   <data name="SettingsShowQuickToggles" xml:space="preserve">
     <value>显示快速开关</value>
   </data>
   <data name="SettingsShowResultsCount" xml:space="preserve">
-    <value>显示结果计数</value>
+    <value>显示结果数</value>
   </data>
   <data name="SettingsSortBy" xml:space="preserve">
     <value>排序</value>
   </data>
   <data name="SettingsTheme" xml:space="preserve">
     <value>主题</value>
+  </data>
+  <data name="SettingsThemeAuto" xml:space="preserve">
+    <value>同步主题</value>
   </data>
   <data name="SettingsThumbnailsEnabled" xml:space="preserve">
     <value>启用缩略图</value>
@@ -360,83 +366,44 @@
   <data name="ShortcutWindowTitle" xml:space="preserve">
     <value>设置快捷键...</value>
   </data>
-  <data name="SortByAttributesAscending" xml:space="preserve">
-    <value>属性升序</value>
+  <data name="SortByAttributes" xml:space="preserve">
+    <value>属性</value>
   </data>
-  <data name="SortByAttributesDescending" xml:space="preserve">
-    <value>属性降序</value>
+  <data name="SortByDateAccessed" xml:space="preserve">
+    <value>访问日期</value>
   </data>
-  <data name="SortByDateAccessedAscending" xml:space="preserve">
-    <value>访问日期升序</value>
+  <data name="SortByDateCreated" xml:space="preserve">
+    <value>创建日期</value>
   </data>
-  <data name="SortByDateAccessedDescending" xml:space="preserve">
-    <value>访问日期降序</value>
+  <data name="SortByDateModified" xml:space="preserve">
+    <value>修改日期</value>
   </data>
-  <data name="SortByDateCreatedAscending" xml:space="preserve">
-    <value>创建日期升序</value>
+  <data name="SortByDateRecentlyChanged" xml:space="preserve">
+    <value>最近修改日期</value>
   </data>
-  <data name="SortByDateCreatedDescending" xml:space="preserve">
-    <value>创建日期降序</value>
+  <data name="SortByDateRun" xml:space="preserve">
+    <value>运行日期</value>
   </data>
-  <data name="SortByDateModifiedAscending" xml:space="preserve">
-    <value>修改日期升序</value>
+  <data name="SortByExtension" xml:space="preserve">
+    <value>扩展名</value>
   </data>
-  <data name="SortByDateModifiedDescending" xml:space="preserve">
-    <value>修改日期降序</value>
+  <data name="SortByFileListFilename" xml:space="preserve">
+    <value>文件列表文件名</value>
   </data>
-  <data name="SortByDateRecentlyChangedAscending" xml:space="preserve">
-    <value>最近修改日期升序</value>
+  <data name="SortByName" xml:space="preserve">
+    <value>文件名</value>
   </data>
-  <data name="SortByDateRecentlyChangedDescending" xml:space="preserve">
-    <value>最近修改日期降序</value>
+  <data name="SortByPath" xml:space="preserve">
+    <value>路径</value>
   </data>
-  <data name="SortByDateRunAscending" xml:space="preserve">
-    <value>运行日期升序</value>
+  <data name="SortByRunCount" xml:space="preserve">
+    <value>运行次数</value>
   </data>
-  <data name="SortByDateRunDescending" xml:space="preserve">
-    <value>运行日期降序</value>
+  <data name="SortBySize" xml:space="preserve">
+    <value>大小</value>
   </data>
-  <data name="SortByExtensionAscending" xml:space="preserve">
-    <value>扩展名升序</value>
-  </data>
-  <data name="SortByExtensionDescending" xml:space="preserve">
-    <value>扩展名降序</value>
-  </data>
-  <data name="SortByFileListFilenameAscending" xml:space="preserve">
-    <value>文件列表文件名升序</value>
-  </data>
-  <data name="SortByFileListFilenameDescending" xml:space="preserve">
-    <value>文件列表文件名降序</value>
-  </data>
-  <data name="SortByNameAscending" xml:space="preserve">
-    <value>名称升序</value>
-  </data>
-  <data name="SortByNameDescending" xml:space="preserve">
-    <value>名称降序</value>
-  </data>
-  <data name="SortByPathAscending" xml:space="preserve">
-    <value>路径升序</value>
-  </data>
-  <data name="SortByPathDescending" xml:space="preserve">
-    <value>路径降序</value>
-  </data>
-  <data name="SortByRunCountAscending" xml:space="preserve">
-    <value>运行次数升序</value>
-  </data>
-  <data name="SortByRunCountDescending" xml:space="preserve">
-    <value>运行次数降序</value>
-  </data>
-  <data name="SortBySizeAscending" xml:space="preserve">
-    <value>大小升序</value>
-  </data>
-  <data name="SortBySizeDescending" xml:space="preserve">
-    <value>大小降序</value>
-  </data>
-  <data name="SortByTypeNameAscending" xml:space="preserve">
-    <value>类型名称升序</value>
-  </data>
-  <data name="SortByTypeNameDescending" xml:space="preserve">
-    <value>类型名称降序</value>
+  <data name="SortByTypeName" xml:space="preserve">
+    <value>类型名称</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
     <value>深色</value>
@@ -464,5 +431,32 @@
   </data>
   <data name="UserFilterVideo" xml:space="preserve">
     <value>视频</value>
+  </data>
+  <data name="UpdateBannerText" xml:space="preserve">
+    <value>有可用更新：</value>
+  </data>
+  <data name="UpdateBannerSkip" xml:space="preserve">
+    <value>跳过</value>
+  </data>
+  <data name="UpdateBannerDownload" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>自动检查更新</value>
+  </data>
+  <data name="SettingsSelectFirstResult" xml:space="preserve">
+    <value>选择第一个结果</value>
+  </data>
+  <data name="SettingsDoubleClickToOpen" xml:space="preserve">
+    <value>双击打开</value>
+  </data>
+  <data name="SortDescending" xml:space="preserve">
+    <value>降序</value>
+  </data>
+  <data name="SortAscending" xml:space="preserve">
+    <value>升序</value>
+  </data>
+  <data name="SettingsSearchAsYouType" xml:space="preserve">
+    <value>键入时搜索</value>
   </data>
 </root>

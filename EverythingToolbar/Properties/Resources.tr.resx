@@ -121,7 +121,7 @@
     <value>Lisans</value>
   </data>
   <data name="AboutOK" xml:space="preserve">
-    <value>TAMAM</value>
+    <value>Tamam</value>
   </data>
   <data name="AboutVersion" xml:space="preserve">
     <value>Sürüm</value>
@@ -151,7 +151,7 @@
     <value>Klasörde Göster</value>
   </data>
   <data name="ContextMenuOpenWinContext" xml:space="preserve">
-    <value>Show more options</value>
+    <value>Daha fazla seçenek göster</value>
   </data>
   <data name="ContextMenuOpenWith" xml:space="preserve">
     <value>Birlikte aç...</value>
@@ -285,7 +285,7 @@
   <data name="RulesWindowTitle" xml:space="preserve">
     <value>Kurallar</value>
   </data>
-  <data name="SearchBoxWatermark" xml:space="preserve">
+  <data name="TextBoxWatermark" xml:space="preserve">
     <value>Her şeyi ara</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
@@ -307,7 +307,7 @@
     <value>Arama Geçmişini etkinleştir</value>
   </data>
   <data name="SettingsHideEmptyResults" xml:space="preserve">
-    <value>Boş aramayı gizle</value>
+    <value>Boş arama'yı gizle</value>
   </data>
   <data name="SettingsMatchCase" xml:space="preserve">
     <value>Büyük-Küçük Harfe Duyarlı</value>
@@ -333,6 +333,9 @@
   <data name="SettingsRules" xml:space="preserve">
     <value>Kurallar...</value>
   </data>
+  <data name="SettingsSetInstanceName" xml:space="preserve">
+    <value>Everything "instance" adını ayarla...</value>
+  </data>
   <data name="SettingsShowQuickToggles" xml:space="preserve">
     <value>Hızlı düğmeleri göster</value>
   </data>
@@ -345,6 +348,9 @@
   <data name="SettingsTheme" xml:space="preserve">
     <value>Tema</value>
   </data>
+  <data name="SettingsThemeAuto" xml:space="preserve">
+    <value>Sistem teması</value>
+  </data>
   <data name="SettingsThumbnailsEnabled" xml:space="preserve">
     <value>Küçük resimleri etkinleştir</value>
   </data>
@@ -355,88 +361,49 @@
     <value>Göster</value>
   </data>
   <data name="ShortcutOK" xml:space="preserve">
-    <value>TAMAM</value>
+    <value>Tamam</value>
   </data>
   <data name="ShortcutWindowTitle" xml:space="preserve">
     <value>Kısayol gir...</value>
   </data>
-  <data name="SortByAttributesAscending" xml:space="preserve">
-    <value>Artan nitelikler</value>
+  <data name="SortByAttributes" xml:space="preserve">
+    <value>Özellikler</value>
   </data>
-  <data name="SortByAttributesDescending" xml:space="preserve">
-    <value>Azalan nitelikler</value>
+  <data name="SortByDateAccessed" xml:space="preserve">
+    <value>Erişim tarihi</value>
   </data>
-  <data name="SortByDateAccessedAscending" xml:space="preserve">
-    <value>Artan erişim tarihi</value>
+  <data name="SortByDateCreated" xml:space="preserve">
+    <value>Oluşturulma tarihi</value>
   </data>
-  <data name="SortByDateAccessedDescending" xml:space="preserve">
-    <value>Azalan erişim tarihi</value>
+  <data name="SortByDateModified" xml:space="preserve">
+    <value>Değiştirilme tarihi</value>
   </data>
-  <data name="SortByDateCreatedAscending" xml:space="preserve">
-    <value>Artan oluşturulma tarihi</value>
+  <data name="SortByDateRecentlyChanged" xml:space="preserve">
+    <value>Yakın zamanda değiştirilenler</value>
   </data>
-  <data name="SortByDateCreatedDescending" xml:space="preserve">
-    <value>Azalan oluşturulma tarihi</value>
+  <data name="SortByDateRun" xml:space="preserve">
+    <value>Çalıştırılma tarihi</value>
   </data>
-  <data name="SortByDateModifiedAscending" xml:space="preserve">
-    <value>Artan değiştirilme tarihi</value>
+  <data name="SortByExtension" xml:space="preserve">
+    <value>Uzantı</value>
   </data>
-  <data name="SortByDateModifiedDescending" xml:space="preserve">
-    <value>Azalan değiştirilme tarihi</value>
+  <data name="SortByFileListFilename" xml:space="preserve">
+    <value>Dosya listesindeki dosya adı</value>
   </data>
-  <data name="SortByDateRecentlyChangedAscending" xml:space="preserve">
-    <value>Artan yakın zamanda değiştirilen tarihi</value>
+  <data name="SortByName" xml:space="preserve">
+    <value>Ad</value>
   </data>
-  <data name="SortByDateRecentlyChangedDescending" xml:space="preserve">
-    <value>Azalan yakın zamanda değiştirilen tarihi</value>
+  <data name="SortByPath" xml:space="preserve">
+    <value>Yol</value>
   </data>
-  <data name="SortByDateRunAscending" xml:space="preserve">
-    <value>Artan çalıştırma tarihi</value>
+  <data name="SortByRunCount" xml:space="preserve">
+    <value>Çalıştırılma miktarı</value>
   </data>
-  <data name="SortByDateRunDescending" xml:space="preserve">
-    <value>Azalan çalıştırma tarihi</value>
+  <data name="SortBySize" xml:space="preserve">
+    <value>Boyut</value>
   </data>
-  <data name="SortByExtensionAscending" xml:space="preserve">
-    <value>Uzantı artan</value>
-  </data>
-  <data name="SortByExtensionDescending" xml:space="preserve">
-    <value>Uzantı azalan</value>
-  </data>
-  <data name="SortByFileListFilenameAscending" xml:space="preserve">
-    <value>Dosya listesi artan dosya adı</value>
-  </data>
-  <data name="SortByFileListFilenameDescending" xml:space="preserve">
-    <value>Dosya listesi azalan dosya adı</value>
-  </data>
-  <data name="SortByNameAscending" xml:space="preserve">
-    <value>Artan ad</value>
-  </data>
-  <data name="SortByNameDescending" xml:space="preserve">
-    <value>Azalan ad</value>
-  </data>
-  <data name="SortByPathAscending" xml:space="preserve">
-    <value>Artan yol</value>
-  </data>
-  <data name="SortByPathDescending" xml:space="preserve">
-    <value>Azalan yol</value>
-  </data>
-  <data name="SortByRunCountAscending" xml:space="preserve">
-    <value>Artan çalıştırma sırası</value>
-  </data>
-  <data name="SortByRunCountDescending" xml:space="preserve">
-    <value>Çalıştırılma sırası, azalan</value>
-  </data>
-  <data name="SortBySizeAscending" xml:space="preserve">
-    <value>Boyut, çoktan aza</value>
-  </data>
-  <data name="SortBySizeDescending" xml:space="preserve">
-    <value>Boyut, azdan çoğa</value>
-  </data>
-  <data name="SortByTypeNameAscending" xml:space="preserve">
-    <value>Dosya türü, alfabetik</value>
-  </data>
-  <data name="SortByTypeNameDescending" xml:space="preserve">
-    <value>Dosya türü, ters alfabetik</value>
+  <data name="SortByTypeName" xml:space="preserve">
+    <value>Dosya tipi adı</value>
   </data>
   <data name="ThemeDark" xml:space="preserve">
     <value>Koyu</value>
@@ -464,5 +431,32 @@
   </data>
   <data name="UserFilterVideo" xml:space="preserve">
     <value>Video</value>
+  </data>
+  <data name="UpdateBannerText" xml:space="preserve">
+    <value>Güncelleme mevcut:</value>
+  </data>
+  <data name="UpdateBannerSkip" xml:space="preserve">
+    <value>Atla</value>
+  </data>
+  <data name="UpdateBannerDownload" xml:space="preserve">
+    <value>İndir</value>
+  </data>
+  <data name="SettingsCheckForUpdates" xml:space="preserve">
+    <value>Güncellemeleri otomatik olarak kontrol et</value>
+  </data>
+  <data name="SettingsSelectFirstResult" xml:space="preserve">
+    <value>İlk sonucu seç</value>
+  </data>
+  <data name="SettingsDoubleClickToOpen" xml:space="preserve">
+    <value>Açmak için çift tıklayın</value>
+  </data>
+  <data name="SortDescending" xml:space="preserve">
+    <value>Azalan</value>
+  </data>
+  <data name="SortAscending" xml:space="preserve">
+    <value>Artan</value>
+  </data>
+  <data name="SettingsSearchAsYouType" xml:space="preserve">
+    <value>Yazarken ara</value>
   </data>
 </root>
